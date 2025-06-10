@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link rel="icon" href="./assets/img/logo.png" type="image/png" />
+    <title>Nexus Marketing - Soluciones Digitales</title>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <link rel="stylesheet" href="./chatbot/css/chatbot.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <div class="particles-container" id="particles-js"></div>
+
+      <nav class="navbar">
+        <a href="#" class="logo">
+          <i class="fas fa-bullseye logo-icon"></i>
+          Nexus<span>Marketing</span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#">Inicio</a></li>
+          <li><a href="#">Servicios</a></li>
+          <li><a href="#">Portafolio</a></li>
+          <li><a href="#">Nosotros</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#" class="cta-button">Contacto</a></li>
+        </ul>
+
+        <div class="hamburger">
+          <div class="line1"></div>
+          <div class="line2"></div>
+          <div class="line3"></div>
+        </div>
+      </nav>
+
+      <div class="hero-content">
+        <h1 class="animate__animated animate__fadeInDown">
+          Impulsa tu negocio con
+          <span class="animate__animated animate__pulse animate__infinite"
+            >estrategias digitales</span
+          >
+        </h1>
+        <p class="animate__animated animate__fadeIn animate__delay-1s">
+          Somos especialistas en transformar ideas en resultados tangibles.
+          Nuestro equipo creativo desarrolla soluciones personalizadas para
+          hacer crecer tu marca.
+        </p>
+        <div
+          class="hero-buttons animate__animated animate__fadeInUp animate__delay-1s"
+        >
+          <a href="#" class="cta-button">Comenzar ahora</a>
+          <a href="#" class="secondary-button">Ver servicios</a>
+        </div>
+      </div>
+
+      <div class="floating-elements">
+        <div
+          class="floating-element"
+          style="width: 100px; height: 100px; top: 20%; left: 70%"
+        ></div>
+        <div
+          class="floating-element"
+          style="width: 150px; height: 150px; top: 60%; left: 80%"
+        ></div>
+        <div
+          class="floating-element"
+          style="width: 80px; height: 80px; top: 40%; left: 10%"
+        ></div>
+        <div
+          class="floating-element"
+          style="width: 120px; height: 120px; top: 70%; left: 30%"
+        ></div>
+      </div>
+    </header>
+
+    <!-- 
+  =============================================
+Componente visual de chatbot listo para integración rápida.
+Incluye interfaz completa: botón toggle, ventana de chat, campo de entrada, mensajes y opciones de limpieza.
+  REQUISITOS EXTERNOS:
+    - FontAwesome (Solid + Regular) para iconos
+    - Estilos CSS externos (ej: chatbot.css)
+    - Script JS para funcionalidad (ej: chatbot.js)
+  =============================================
+-->
+
+    <!-- 
+  Botón de invitación inicial al usuario.
+  Este elemento puede mostrarse u ocultarse dinámicamente según preferencias.
+-->
+    <div id="chatbot-invite" class="chatbot-invite">
+      <span>¡Chatea con nosotros!</span>
+    </div>
+
+    <!-- 
+  Botón gráfico para abrir/cerrar el chatbot.
+  Contiene una imagen representativa con efecto zoom definido por la clase "img-zoom".
+-->
+    <div id="chatbot-toggle" class="chatbot-toggle">
+      <img
+        src="./chatbot/img/chatbot.png"
+        width="50"
+        height="50"
+        alt="Icono del asistente virtual"
+        class="img-zoom"
+      />
+    </div>
+
+    <!-- 
+  Contenedor principal del chatbot.
+  Se encuentra oculto inicialmente mediante la clase "hidden".
+  Esta clase debe estar definida en el CSS como display: none;
+-->
+    <div id="chatbot-container" class="chatbot-container hidden">
+      <!-- Encabezado del chatbot -->
+      <div class="chatbot-header">
+        <span style="display: inline-flex; align-items: center; gap: 8px">
+          <img
+            src="./chatbot/img/chatbot.png"
+            width="50"
+            height="50"
+            alt="Asistente Virtual"
+            class="img-zoom"
+          />
+          <span>Tu Asistente Virtual</span>
+        </span>
+
+        <!-- Botón para cerrar el chatbot -->
+        <button
+          id="chatbot-close"
+          class="chatbot-close"
+          aria-label="Cerrar chatbot"
+        >
+          <i class="fa-solid fa-circle-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Área de mensajes -->
+      <div id="chatbot-messages" class="chatbot-messages">
+        <!-- Los mensajes se insertan dinámicamente desde JavaScript -->
+      </div>
+
+      <!-- Pie del chatbot con controles de entrada -->
+      <div class="chatbot-footer">
+        <!-- Botón para limpiar historial de chat -->
+        <button class="clear-history-btn" title="Limpiar Historial">
+          <i class="fa-regular fa-trash-can"></i>
+        </button>
+
+        <!-- Campo de entrada de texto -->
+        <input
+          type="text"
+          id="chatbot-input-field"
+          class="chatbot-input-field"
+          placeholder="Escribe tu mensaje..."
+          autofocus
+          aria-label="Campo de entrada del chatbot"
+        />
+
+        <!-- Botón para enviar mensaje -->
+        <button
+          id="chatbot-send"
+          class="chatbot-send"
+          aria-label="Enviar mensaje"
+        >
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+
+    <script src="./chatbot/js/chatbot.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+    <script src="./assets/js/scripts.js"></script>
+  </body>
+</html>

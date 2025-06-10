@@ -1,0 +1,2710 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link rel="icon" href="./img/chatbot.png" type="image/png" />
+    <title>Documentación de ChatBot + IA</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <!-- Prism CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs-tomorrow-theme@0.0.1/prism-tomorrow.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="documentation-container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+  <div class="logo">
+    <img src="./img/chatbot.png" alt="chatbot" style="width: 30px; height: 30px">
+    <span style="margin-left: 5px;">ChatBot + IA</span>
+  </div>
+
+  <nav class="main-nav">
+    <ul>
+      <!-- Sección: General -->
+      <li class="active">
+        <a href="#introduccion">
+          <i class="fas fa-home"></i> Introducción
+        </a>
+      </li>
+
+      <!-- Sección: Instalación -->
+      <li class="section-title">🛠 Instalación</li>
+      <li>
+        <a href="#instalacion-configuracion">
+          <i class="fas fa-cogs"></i> Instalación y Configuración
+        </a>
+      </li>
+      
+
+      <!-- Sección: Código -->
+      <li class="section-title">📂 Documentación del Código</li>
+      <li>
+        <a href="#estructura">
+          <i class="fas fa-folder-open"></i> Estructura de Archivos
+        </a>
+      </li>
+      <li>
+        <a href="#env-guia">
+          <i class="fa-solid fa-file-lines"></i> Variable de entorno (.env)
+        </a>
+      </li>
+      
+      <li>
+        <a href="#php-guia">
+          <i class="fa-brands fa-php"></i> Guía PHP
+        </a>
+      </li>
+      <li>
+        <a href="#html-guia">
+          <i class="fas fa-code"></i> Guía HTML
+        </a>
+      </li>
+      <li>
+        <a href="#css-guia">
+          <i class="fab fa-css3-alt"></i> Guía CSS
+        </a>
+      </li>
+      <li>
+        <a href="#js-guia">
+          <i class="fab fa-js-square"></i> Guía JavaScript
+        </a>
+      </li>
+      <li>
+        <a href="#soporte">
+          <i class="fas fa-life-ring"></i> Soporte
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="version-selector">
+    <label for="version"><i class="fas fa-tag"></i> Versión:</label>
+    <select id="version">
+      <option>1.0.0</option>
+    </select>
+  </div>
+</aside>
+
+
+      <!-- Main Content -->
+      <main class="content">
+        <section id="introduccion" class="doc-section">
+          <h1>Documentación de ChatBot + IA</h1>
+          <p>
+            Este manual describe cómo configurar e implementar un chatbot con
+            inteligencia artificial utilizando PHP y la API de OpenAI, incluyendo Deepseek y OpenRouter (o compatible). El sistema incluye funcionalidades
+            avanzadas como caché, historial de conversación y personalización
+            basada en datos de la empresa.
+          </p>
+          <p>El chatbot es completamente adaptable y puede integrarse fácilmente en cualquier sitio web, mejorando la experiencia del usuario desde el primer clic.</p>
+
+          <div class="requirements">
+            <h2><i class="fas fa-tools"></i> Requisitos</h2>
+            <ul>
+              <li>Editor de código (VS Code, Sublime Text, etc.).</li>
+              <li>Navegador moderno (Chrome, Firefox, Edge).</li>
+              <li>Conocimientos básicos de HTML/CSS/JS/PHP.</li>
+              <li>Servidor web con PHP 8.0 o superior.</li>
+              <li>Extensión cURL habilitada.</li>
+              <li>Recomendado: Extensión APCu para caché en memoria.</li>
+              <li>Acceso a la API (clave API válida).</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="instalacion-configuracion" class="doc-section">
+  <h2><i class="fas fa-cogs"></i> Instalación y Configuración</h2>
+  <p>
+    Sigue estos pasos para integrar y configurar el ChatBot + IA en tu sitio web.
+    La instalación está diseñada para ser sencilla, permitiendo una rápida puesta en marcha.
+  </p>
+
+  <hr>
+
+  <h3>Paso 1: Colocar la carpeta del Chatbot</h3>
+  <p>
+    El chatbot se distribuye en una carpeta llamada <code>/chatbot</code>. Para utilizarlo,
+    simplemente copia esta carpeta completa y colócala en el <strong>directorio raíz</strong>
+    de tu sitio web. Este es el mismo lugar donde generalmente se encuentra tu archivo
+    <code>index.html</code> o la página principal de tu sitio.
+  </p>
+  <p>La estructura de tu proyecto debería verse similar a esto:</p>
+  <pre><code class="language-plaintext">
+/tu-sitio-web-raiz/
+  ├── index.html (o tu página principal)
+  ├── css/
+  ├── js/
+  ├── img/
+  ├── chatbot/  <-- AQUÍ VA LA CARPETA DEL CHATBOT
+  │     ├── cache/
+  │           ├── company_data.cache
+  │     ├── css/
+  │           ├── chatbot.css
+  │     ├── data/
+  │           ├── company.json
+  │     ├── img/
+  │           ├── chatbot.png
+  │     ├── js/
+  │           ├── chatbot.js
+  │     ├── .env
+  │     ├── chatbot.php
+  └── ... (otros archivos y carpetas de tu sitio)
+  </code></pre>
+  <p>
+    Asegúrate de que las carpetas <code>/chatbot/data/</code> y <code>/chatbot/cache/</code> existan y tengan permisos de escritura si tu servidor lo requiere para que el script PHP pueda crear y modificar archivos dentro de ellas.
+  </p>
+
+  <hr>
+
+  <h3>Paso 2: Integrar el HTML del Chatbot</h3>
+  <p>
+    Para que el chatbot esté disponible en todas las secciones de tu sitio web,
+    se recomienda incluir su código HTML en el pie de página (<code>footer</code>)
+    de tu plantilla principal o justo antes de la etiqueta de cierre <code>&lt;/body&gt;</code>
+    en cada página donde desees que aparezca.
+  </p>
+  <p>Copia y pega el siguiente bloque de código HTML:</p>
+  <pre><code class="language-html">
+&lt;!-- Componente Chatbot --&gt;
+&lt;!-- Botón de invitación inicial --&gt;
+&lt;div id="chatbot-invite" class="chatbot-invite"&gt;
+  &lt;span&gt;¡Chatea con nosotros!&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Botón para abrir/cerrar el chatbot --&gt;
+&lt;div id="chatbot-toggle" class="chatbot-toggle"&gt;
+  &lt;img
+    src="./chatbot/img/chatbot.png"
+    width="50"
+    height="50"
+    alt="Icono del asistente virtual"
+    class="img-zoom"
+  /&gt;
+&lt;/div&gt;
+
+&lt;!-- Contenedor principal del chatbot --&gt;
+&lt;div id="chatbot-container" class="chatbot-container hidden"&gt;
+  &lt;!-- Encabezado del chatbot --&gt;
+  &lt;div class="chatbot-header"&gt;
+    &lt;span style="display: inline-flex; align-items: center; gap: 8px"&gt;
+      &lt;img
+        src="./chatbot/img/chatbot.png"
+        width="50"
+        height="50"
+        alt="Asistente Virtual"
+        class="img-zoom"
+      /&gt;
+      &lt;span&gt;Tu Asistente Virtual&lt;/span&gt;
+    &lt;/span&gt;
+    &lt;button
+      id="chatbot-close"
+      class="chatbot-close"
+      aria-label="Cerrar chatbot"
+    &gt;
+      &lt;i class="fa-solid fa-circle-xmark"&gt;&lt;/i&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Área de mensajes --&gt;
+  &lt;div id="chatbot-messages" class="chatbot-messages"&gt;
+    &lt;!-- Los mensajes se insertan dinámicamente desde JavaScript --&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Pie del chatbot con controles de entrada --&gt;
+  &lt;div class="chatbot-footer"&gt;
+    &lt;button class="clear-history-btn" title="Limpiar Historial"&gt;
+      &lt;i class="fa-regular fa-trash-can"&gt;&lt;/i&gt;
+    &lt;/button&gt;
+    &lt;input
+      type="text"
+      id="chatbot-input-field"
+      class="chatbot-input-field"
+      placeholder="Escribe tu mensaje..."
+      autofocus
+      aria-label="Campo de entrada del chatbot"
+    /&gt;
+    &lt;button
+      id="chatbot-send"
+      class="chatbot-send"
+      aria-label="Enviar mensaje"
+    &gt;
+      &lt;i class="fas fa-paper-plane"&gt;&lt;/i&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- Fin Componente Chatbot --&gt;
+  </code></pre>
+  <p class="nota-importante ">
+     Asegúrate de que las rutas a las imágenes (ej. <code>src="./chatbot/img/chatbot.png"</code>)
+    sean correctas desde la ubicación de tus archivos HTML principales. Si tu archivo <code>index.html</code> está en la raíz
+    y la carpeta <code>chatbot</code> también, estas rutas deberían funcionar.
+  </p>
+  <p>
+    No olvides enlazar los archivos CSS (<code>chatbot.css</code>) y JavaScript (<code>chatbot.js</code>) del chatbot en tu HTML,
+    generalmente en la sección <code>&lt;head&gt;</code> para CSS y antes de cerrar <code>&lt;/body&gt;</code> para JS:
+  </p>
+  <pre><code class="language-html">
+&lt;!-- En el &lt;head&gt; o antes de cerrar &lt;/body&gt; para CSS --&gt;
+&lt;link rel="stylesheet" href="./chatbot/chatbot.css"&gt;
+
+&lt;!-- Antes de cerrar &lt;/body&gt; para JavaScript --&gt;
+&lt;script src="./chatbot/chatbot.js"&gt;&lt;/script&gt;
+  </code></pre>
+
+  <hr>
+
+  <h3>Paso 3: Configurar el archivo de entorno (<code>.env</code>)</h3>
+  <p>
+    El chatbot utiliza un archivo <code>.env</code> para gestionar configuraciones sensibles y específicas
+    del entorno, como claves de API y rutas.
+    <code>/chatbot/.env</code>.
+  </p>
+  <pre><code class="language-ini">
+API_URL=https://api.openai.com/v1/chat/completions
+API_KEY=tu_clave_api_aqui
+MODEL=gpt-3.5-turbo
+COMPANY_DATA_PATH=./data/company.json
+MAX_TOKENS=1000
+TEMPERATURE=0.7
+CACHE_PATH=./cache/
+COMPANY_CACHE_FILE=./cache/company_data.cache
+CACHE_LIFETIME=3600
+  </code></pre>
+  <p><strong>Descripción de las variables:</strong></p>
+  <ul>
+    <li>
+      <code>API_URL</code>: El endpoint de la API del modelo de lenguaje. (Ej: OpenAI).
+    </li>
+    <li>
+      <code>API_KEY</code>: <strong>Importante:</strong> Reemplaza <code>tu_clave_api_aqui</code> con tu clave API real
+      proporcionada por el servicio de IA (Ej: OpenAI).
+    </li>
+    <li>
+      <code>MODEL</code>: El identificador del modelo de IA que deseas utilizar.
+    </li>
+    <li>
+      <code>COMPANY_DATA_PATH</code>: Ruta relativa (desde el script PHP que lo lee, usualmente dentro de <code>/chatbot/</code>)
+      al archivo JSON que contiene la información de tu empresa. Por defecto, <code>./data/company.json</code> se refiere a
+      <code>/chatbot/data/company.json</code>.
+    </li>
+    <li>
+      <code>MAX_TOKENS</code>: Número máximo de tokens (palabras/subpalabras) que la IA generará en su respuesta.
+    </li>
+    <li>
+      <code>TEMPERATURE</code>: Controla la "creatividad" o aleatoriedad de las respuestas de la IA.
+      Valores más bajos (ej. 0.2) generan respuestas más deterministas y enfocadas, mientras que valores más altos
+      (ej. 0.8) generan respuestas más creativas y diversas. <code>0.7</code> es un valor balanceado.
+    </li>
+    <li>
+      <code>CACHE_PATH</code>: Ruta relativa al directorio donde se guardarán los archivos de caché.
+      Por defecto, <code>./cache/</code> se refiere a <code>/chatbot/cache/</code>.
+    </li>
+    <li>
+      <code>COMPANY_CACHE_FILE</code>: Ruta relativa al archivo de caché específico para los datos de la empresa.
+      Por defecto, <code>./cache/company_data.cache</code> se refiere a <code>/chatbot/cache/company_data.cache</code>.
+    </li>
+    <li>
+      <code>CACHE_LIFETIME</code>: Tiempo de vida de la caché en segundos (ej. <code>3600</code> = 1 hora).
+    </li>
+  </ul>
+
+  <p class="nota-importante ">
+    <strong>¡No compartas tu archivo <code>.env</code> públicamente ni lo subas a repositorios de código públicos!</strong>
+    Asegúrate de que tu servidor web esté configurado para denegar el acceso directo a los archivos <code>.env</code>.
+    Si usas Git, añade <code>.env</code> a tu archivo <code>.gitignore</code>.
+  </p>
+
+  <hr>
+
+  <h3>Paso 4: Configurar el archivo de información de la empresa (<code>company.json</code>)</h3>
+  <p>
+    El chatbot está diseñado para responder preguntas basadas en la información específica de tu empresa.
+    Esta información se carga desde un archivo JSON.
+  </p>
+  <p>
+    Crea un archivo llamado <code>company.json</code> dentro de la carpeta <code>/chatbot/data/</code>
+    (la ruta por defecto es <code>./data/company.json</code> según la configuración del <code>.env</code>).
+  </p>
+  <p>El contenido de este archivo debe ser un objeto JSON estructurado con la información que deseas que la IA conozca. Aquí tienes un ejemplo básico:</p>
+  <pre><code class="language-json">
+{
+  "nombre_empresa": "Mi Gran Empresa S.A.",
+  "descripcion_general": "Somos líderes en soluciones innovadoras para el sector X, 
+                          con más de 20 años de experiencia.",
+  "horario_atencion": "Lunes a Viernes de 9:00 AM a 6:00 PM",
+  "contacto": {
+    "telefono": "+123 456 7890",
+    "email": "info@migranempresa.com",
+    "direccion": "Calle Falsa 123, Ciudad Ejemplo"
+  },
+  "productos_servicios": [
+    {
+      "nombre": "Producto Estrella Alfa",
+      "descripcion": "Nuestra solución más popular para optimizar Y.",
+      "precio": "Desde $99"
+    },
+    {
+      "nombre": "Servicio Beta Premium",
+      "descripcion": "Consultoría experta y soporte 24/7 para Z.",
+      "caracteristicas": ["Soporte prioritario", "Consultores dedicados", "Informes mensuales"]
+    }
+  ],
+  "preguntas_frecuentes": [
+    {
+      "pregunta": "¿Cómo puedo contratar sus servicios?",
+      "respuesta": "Puedes contactarnos a través de nuestro email info@migranempresa.com o llamando 
+                    al +123 456 7890. También puedes visitar nuestra sección de contacto en la web."
+    },
+    {
+      "pregunta": "¿Ofrecen demostraciones?",
+      "respuesta": "Sí, ofrecemos demostraciones gratuitas de nuestro Producto Estrella Alfa. 
+                    Por favor, agenda una cita con nuestro equipo de ventas."
+    }
+  ],
+  "politica_devoluciones": "Puedes consultar nuestra política de devoluciones en www.example.com/devoluciones. 
+                            Generalmente aceptamos devoluciones dentro de los 30 días posteriores a la compra, 
+                            siempre que el producto esté en su estado original."
+}
+  </code></pre>
+  <p>
+    Puedes estructurar este JSON como mejor te convenga. La IA intentará extraer la información relevante
+    de este archivo para responder a las consultas de los usuarios relacionadas con tu empresa. Cuanto más detallada
+    y bien estructurada sea la información, mejores serán las respuestas.
+  </p>
+
+  <hr>
+  <p>
+    Una vez completados estos pasos, tu chatbot debería estar listo para funcionar en tu sitio web.
+    Dirígete a las guías específicas de PHP, HTML, CSS y JavaScript para entender mejor cómo
+    modificar y extender la funcionalidad del chatbot.
+  </p>
+</section>
+
+        <section id="estructura" class="doc-section">
+          <h2><i class="fas fa-folder-open"></i> Estructura de Archivos</h2>
+          <p>La plantilla sigue una estructura organizada y modular:</p>
+
+<pre><code class="language-plaintext">
+/chatbot/
+     ├── cache/
+           ├── company_data.cache
+     ├── css/
+           ├── chatbot.css
+     ├── data/
+           ├── company.json
+     ├── img/
+           ├── chatbot.png
+     ├── js/
+           ├── chatbot.js
+     ├── .env
+     ├── chatbot.php
+  </code></pre>
+
+          <div class="file-description">
+            <h3>Descripción de archivos</h3>
+            <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+              <thead>
+                <tr>
+                  <th>Archivo/Carpeta</th>
+                  <th>Descripción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>cache/company_data.cache</code></td>
+                  <td>
+                    Archivo de caché que almacena datos de la empresa para
+                    mejorar el rendimiento
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>css/chatbot.css</code></td>
+                  <td>
+                    Archivo de hojas de estilo que define el diseño y apariencia
+                    del chatbot
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>js/chatbot.js</code></td>
+                  <td>
+                    Lógica principal del chatbot, incluyendo interacciones y
+                    funcionalidades
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>data/company.json</code></td>
+                  <td>
+                    Datos estructurados de la empresa en formato JSON que el
+                    chatbot puede utilizar
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>img/chatbot.png</code></td>
+                  <td>Imagen o icono que representa visualmente al chatbot</td>
+                </tr>
+                <tr>
+                  <td><code>.env</code></td>
+                  <td><p>
+                    Este archivo .env contiene las variables de entorno necesarias para la configuración general del chatbot con inteligencia artificial. Estas variables permiten conectar con un modelo de lenguaje alojado en OpenAI, incluyendo Deepseek y OpenRouter (o compatible), define el comportamiento del modelo y gestiona el uso de caché y datos de la empresa.
+                  </p></td>
+                </tr>
+                <tr>
+                  <td><code>chatbot.php</code></td>
+                  <td>
+                    <p>
+                      Archivo principal del backend del chatbot que maneja toda
+                      la lógica de comunicación con la API de DeepSeek. Sus
+                      funciones principales son:
+                    </p>
+                    <div style="margin-left:2rem">
+                      <ul>
+                      <li>
+                        <strong>Configuración:</strong> Define constantes como
+                        API_URL, API_KEY, parámetros del modelo (MAX_TOKENS,
+                        TEMPERATURE)
+                      </li>
+                      <li>
+                        <strong>Gestión de caché:</strong> Implementa sistema de
+                        caché para datos de la empresa (APCu y archivos)
+                      </li>
+                      <li>
+                        <strong>Conexión API:</strong> Incluye función
+                        <code>testAPIConnection()</code> para verificar
+                        conectividad
+                      </li>
+                      <li>
+                        <strong>Procesamiento de mensajes:</strong> Función
+                        <code>callAIModelAPI()</code> que construye el contexto
+                        del chat
+                      </li>
+                      <li>
+                        <strong>Manejo de sesiones:</strong> Mantiene historial
+                        de conversación en <code>$_SESSION</code>
+                      </li>
+                      <li>
+                        <strong>Endpoints:</strong> Maneja peticiones para
+                        enviar mensajes, cargar/borrar historial y limpiar caché
+                      </li>
+                      <li>
+                        <strong>Seguridad:</strong> Validación de entradas y
+                        manejo de errores
+                      </li>
+                    </ul>
+                    </div>
+                    
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Secciones clave:</strong></td>
+                  <td>
+                    <div style="margin-left:2rem">
+                    <ol>
+                      <li>
+                        Configuración de constantes y parámetros del modelo
+                      </li>
+                      <li>
+                        Función <code>load_company_data()</code> con sistema
+                        de caché de dos niveles
+                      </li>
+                      <li>
+                        Función <code>callAIModelAPI()</code> que construye el
+                        contexto del chat incluyendo:
+                        <ul style="margin-left: 20px;">
+                          <li>Instrucciones del sistema</li>
+                          <li>Datos de la empresa</li>
+                          <li>Historial de conversación</li>
+                        </ul>
+                      </li>
+                      <li>
+                        Manejo de peticiones POST para diferentes acciones del
+                        chatbot
+                      </li>
+                      <li>
+                        Sistema completo de manejo de errores y respuestas JSON
+                      </li>
+                    </ol>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Guia ENV -->
+        <section id="env-guia" class="doc-section">
+          <h2><i class="fa-solid fa-file-lines"></i> Variable de entorno</h2>
+          <p style="color: #4361ee">/chatbot/.env</p>
+            <p>Este archivo .env contiene las variables de entorno necesarias para la configuración general del chatbot con inteligencia artificial. Estas variables permiten conectar con un modelo de lenguaje alojado en OpenRouter, definir el comportamiento del modelo y gestionar el uso de caché y datos de la empresa.</p>
+          <h3>Configuración del <code>.env</code></h3>
+<pre>
+<code class="language-php">
+API_URL=https://api.openai.com/v1/chat/completions
+API_KEY=
+MODEL=gpt-3.5-turbo
+COMPANY_DATA_PATH=./data/company.json
+MAX_TOKENS=1000
+TEMPERATURE=0.7
+CACHE_PATH=./cache/
+COMPANY_CACHE_FILE=./cache/company_data.cache
+CACHE_LIFETIME=3600
+</code>
+</pre>
+
+<br>
+<h4>Variables explicadas</h4>
+
+<table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+  <thead style="background-color: #f2f2f2;">
+    <tr>
+      <th>Variable</th>
+      <th>Descripción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>API_URL</td>
+      <td>URL del endpoint de la API utilizada para enviar las solicitudes de conversación al modelo de IA.</td>
+    </tr>
+    <tr>
+      <td>API_KEY</td>
+      <td>Clave de autenticación necesaria para acceder a la API. Debe mantenerse privada y segura.</td>
+    </tr>
+    <tr>
+      <td>MODEL</td>
+      <td>Identificador del modelo de lenguaje a utilizar. En este caso: <code>gpt-3.5-turbo</code>, uno de los modelos de OpenAI optimizado para velocidad y eficiencia en tareas conversacionales.</td>
+    </tr>
+    <tr>
+      <td>COMPANY_DATA_PATH</td>
+      <td>Ruta local al archivo JSON que contiene los datos de la empresa (por ejemplo, nombre, información de contacto o respuestas personalizadas).</td>
+    </tr>
+    <tr>
+      <td>MAX_TOKENS</td>
+      <td>Número máximo de tokens (fragmentos de texto) que puede generar el modelo en cada respuesta. Limita la longitud de las respuestas.</td>
+    </tr>
+    <tr>
+      <td>TEMPERATURE</td>
+      <td>Valor de temperatura que controla la aleatoriedad de las respuestas. Valores bajos (ej. 0.2) producen respuestas más deterministas; valores más altos (0.7 o más) generan respuestas más creativas.</td>
+    </tr>
+    <tr>
+      <td>CACHE_PATH</td>
+      <td>Ruta local donde se almacenan los archivos de caché generados por el sistema para mejorar el rendimiento.</td>
+    </tr>
+    <tr>
+      <td>COMPANY_CACHE_FILE</td>
+      <td>Archivo específico de caché que guarda temporalmente los datos procesados de la empresa. Reduce lecturas repetitivas del archivo original.</td>
+    </tr>
+    <tr>
+      <td>CACHE_LIFETIME</td>
+      <td>Tiempo de vida útil de la caché en segundos (ej. 3600 = 1 hora). Después de este período, los datos se refrescan automáticamente.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="nota-importante">
+  <div style="margin:1rem">
+    <ul>
+      <li>No compartas públicamente el archivo <code>.env</code>, especialmente si contiene claves API privadas.</li>
+      <li>Este archivo debe estar ubicado en la raíz del proyecto para ser correctamente interpretado por el entorno de ejecución.</li>
+      <li>Si modificas los valores del modelo o parámetros de generación, es recomendable reiniciar la aplicación o limpiar la caché.</li>
+    </ul>
+  </div>
+
+</div>
+        </section>
+
+
+        <!-- Guia PHP -->
+        <section id="php-guia" class="doc-section">
+
+          <h2><i class="fa-brands fa-php"></i> Guía PHP</h2>   
+          <p style="color: #4361ee">/chatbot/chatbot.php</p>
+          <p>El archivo <code>chatbot.php</code> implementa el backend funcional de un chatbot interactivo que se comunica con una API de inteligencia artificial compatible con estándares como OpenAI, incluyendo Deepseek y OpenRouter (o compatible). Este script proporciona una solución completa para integrar un asistente virtual en una aplicación web o sitio, gestionando desde la comunicación con la API hasta el manejo de sesiones, caché y respuestas estructuradas en formato JSON.</p>
+
+          <h3>Configuración del <code>chatbot.php</code></h3>
+          <h4>Función: <code>loadEnv()</code></h4>
+          <p>La función loadEnv se encarga de cargar las variables de entorno definidas en un archivo .env ubicado en la ruta especificada por el parámetro $path. Estas variables son leídas línea por línea, procesadas para extraer su nombre y valor, y luego establecidas como variables de entorno del sistema utilizando la función putenv(), lo que permite acceder a ellas posteriormente mediante getenv() o $_ENV.</p>
+
+<pre>
+<code class="language-php">
+function loadEnv($path) {
+    // Verifica si el archivo .env existe. Si no existe, se detiene la ejecución de la función.
+    if (!file_exists($path)) return;
+
+    // Lee el archivo línea por línea, ignorando líneas vacías y saltos de línea.
+    $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+    foreach ($lines as $line) {
+        // Omite las líneas que comienzan con '#' ya que se consideran comentarios en el archivo .env.
+        // Versión compatible con PHP 7.4: if (strpos(trim($line), '#') === 0) continue;
+        if (str_starts_with(trim($line), '#')) continue;
+
+        // Divide cada línea en una clave y un valor utilizando el signo '=' como separador.
+        list($name, $value) = explode('=', $line, 2);
+
+        // Elimina espacios en blanco y comillas innecesarias de ambos lados.
+        $name = trim($name);
+        $value = trim($value, '"\'');
+
+        // Establece la variable de entorno usando putenv(), que la hace accesible mediante getenv().
+        putenv("$name=$value");
+    }
+}         
+</code>
+</pre>
+
+<h4>Parámetros:</h4>
+<div style="margin: 1rem">
+  <ol>
+    <li>
+      Verificación del archivo.
+      <ul style="padding-left: 1.5rem; list-style-type: disc;">
+        <li>Si el archivo especificado no existe, la función termina inmediatamente sin realizar ninguna acción.</li>
+      </ul>
+    </li>
+    <li>
+      Lectura del archivo.
+      <ul style="padding-left: 1.5rem; list-style-type: disc;">
+        <li>El archivo es leído línea por línea.</li>
+        <li>Se ignoran líneas vacías y saltos de línea gracias a las banderas <code>FILE_IGNORE_NEW_LINES</code> y <code>FILE_SKIP_EMPTY_LINES</code>.</li>
+      </ul>
+    </li>
+    <li>
+      Procesamiento de cada línea.
+      <ul style="padding-left: 1.5rem; list-style-type: disc;">
+        <li>Las líneas que comienzan con el carácter <code>#</code> son tratadas como comentarios y omitidas.</li>
+        <li>Cada línea válida es dividida en dos partes: nombre  y valor , usando el primer signo igual (<code>=</code>) como separador.</li>
+        <li>Se eliminan espacios en blanco y posibles comillas (simples o dobles) alrededor del valor.</li>
+      </ul>
+    </li>
+    <li>
+      Establecimiento de la variable de entorno.
+      <ul style="padding-left: 1.5rem; list-style-type: disc;">
+        <li>La variable es registrada como una variable de entorno del sistema mediante <code>putenv("$name=$value")</code>.</li>
+      </ul>
+    </li>
+  </ol>
+</div>
+
+
+  <h4>Llama a la función para cargar las variables desde el archivo .env ubicado en el mismo directorio que este archivo.</h4>
+<pre><code class="language-php">
+  loadEnv(__DIR__ . '/.env');
+</code></pre>
+
+<br>
+<h3>Configuración de Variables de Entorno</h3>
+<pre><code class="language-php">
+define('API_URL', getenv('API_URL'));                     
+define('API_KEY', getenv('API_KEY'));                     
+define('MODEL', getenv('MODEL'));                         
+define('COMPANY_DATA_PATH', getenv('COMPANY_DATA_PATH')); 
+define('MAX_TOKENS', getenv('MAX_TOKENS'));               
+define('TEMPERATURE', (float) getenv('TEMPERATURE'));     
+define('CACHE_PATH', getenv('CACHE_PATH'));               
+define('COMPANY_CACHE_FILE', getenv('COMPANY_CACHE_FILE'));
+define('CACHE_LIFETIME', getenv('CACHE_LIFETIME'));       
+</code></pre>
+<p>
+Define constantes globales usando las variables cargadas desde el archivo .env.
+Estas constantes son utilizadas en el resto de la aplicación para configurar parámetros clave como la API, modelo, etc.
+</p>
+
+
+<div style="margin:1rem">
+  <ul>
+    <li><b>API_URL:</b> Define la URL base para realizar las peticiones a la API de chat.</li>
+    <li><b>API_KEY:</b> Establece la clave de autenticación necesaria para acceder a la API.</li>
+    <li><b>MODEL:</b> Indica qué modelo de lenguaje será utilizado (por ejemplo: gpt-4, gpt-3.5, etc.).</li>
+    <li><b>COMPANY_DATA_PATH:</b> Define la ruta hacia el archivo que contiene los datos relevantes de la empresa.</li>
+    <li><b>MAX_TOKENS:</b> Limita la cantidad de tokens que puede generar el modelo en una respuesta.</li>
+    <li><b>TEMPERATURE:</b> Controla la aleatoriedad de las respuestas del modelo; valores más altos generan respuestas más creativas.</li>
+    <li><b>CACHE_PATH:</b> Ruta general donde se guardan archivos de caché para mejorar el rendimiento.</li>
+    <li><b>COMPANY_CACHE_FILE:</b> Especifica el archivo de caché destinado a los datos de la empresa.</li>
+    <li><b>CACHE_LIFETIME:</b> Determina el tiempo (en segundos) que un archivo de caché es considerado válido antes de necesitar actualización.</li>
+  </ul>
+</div>
+
+<br>
+<h3>Configuración de Visualización de Errores</h3>
+<p>Este bloque de código activa la visualización de todos los errores de PHP, lo cual es fundamental durante la etapa de desarrollo o pruebas para identificar y corregir problemas rápidamente.</p>
+
+<pre><code class="language-php">
+error_reporting(E_ALL);
+ini_set('display_errors', 1);  
+</code></pre>
+<div style="margin:1rem">
+  <ul>
+    <li><b>error_reporting(E_ALL): </b>Configura PHP para que informe sobre todos los tipos de errores posibles, incluyendo notices, warnings y fatal errors. Esto es útil para asegurar que incluso los problemas menores se detecten a tiempo.</li>
+    <li><b>ini_set('display_errors', 1): </b>Indica a PHP que muestre los errores directamente en el navegador o consola. Esto facilita el proceso de depuración durante el desarrollo.</li>
+  </ul>
+</div>
+<div class="nota-importante">
+  <p>Estas configuraciones deben desactivarse o ajustarse en entornos de producción para evitar exponer información sensible a los usuarios finales. Para producción, se recomienda:</p>
+</div>
+<pre><code class="language-php">
+ini_set('display_errors', 0);
+</code></pre>
+
+<br>
+<h4>Función: <code>load_company_data()</code></h4>
+<p>Esta función se encarga de cargar los datos de una empresa desde un archivo JSON, implementando un sistema de caché eficiente tanto en memoria (APCu) como en archivo local para mejorar el rendimiento en futuras solicitudes.</p>
+
+<pre><code class="language-php">
+function load_company_data() {
+    // Verifica si el archivo de datos existe. Si no, lanza una excepción con un mensaje claro.
+    if (!file_exists(COMPANY_DATA_PATH)) {
+        throw new Exception("Archivo de datos de empresa no encontrado");
+    }
+
+    // Obtiene la última fecha de modificación del archivo y genera una clave única de caché.
+    $lastModified = filemtime(COMPANY_DATA_PATH);
+    $cacheKey = 'company_data_' . md5(COMPANY_DATA_PATH) . '_' . $lastModified;
+
+    // Si la extensión APCu está habilitada y la caché está disponible, devuelve los datos 
+    // directamente desde la caché.
+    if (extension_loaded('apcu') && apcu_exists($cacheKey)) {
+        return apcu_fetch($cacheKey);
+    }
+
+    // Verifica si hay un archivo de caché local disponible y coincide con la clave generada.
+    if (file_exists(COMPANY_CACHE_FILE)) {
+        $cacheData = json_decode(file_get_contents(COMPANY_CACHE_FILE), true);
+
+        // Si la caché es válida y coincide con la clave, la devuelve (y la vuelve a almacenar en 
+        // APCu si está habilitada).
+        if ($cacheData && isset($cacheData['cache_key']) && $cacheData['cache_key'] === $cacheKey) {
+            if (extension_loaded('apcu')) {
+                apcu_store($cacheKey, $cacheData['content'], CACHE_LIFETIME);
+            }
+            return $cacheData['content'];
+        }
+    }
+
+    // Si no se encuentra la caché, carga los datos desde el archivo JSON directamente.
+    $jsonData = file_get_contents(COMPANY_DATA_PATH);
+    $data = json_decode($jsonData, true);
+
+    // Verifica si hubo un error al decodificar el JSON.
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        throw new Exception("Error decodificando JSON: " . json_last_error_msg());
+    }
+
+    // Prepara la estructura de caché con los datos cargados.
+    $cacheData = [
+        'cache_key' => $cacheKey,
+        'content' => $data,
+        'timestamp' => time(),
+        'source' => COMPANY_DATA_PATH
+    ];
+
+    // Almacena los datos en APCu si está disponible.
+    if (extension_loaded('apcu')) {
+        apcu_store($cacheKey, $data, CACHE_LIFETIME);
+    }
+
+    // Asegura que la carpeta de caché exista antes de guardar el archivo.
+    if (!file_exists(CACHE_PATH)) {
+        mkdir(CACHE_PATH, 0755, true);
+    }
+
+    // Guarda los datos de caché en un archivo local para accesos futuros.
+    file_put_contents(COMPANY_CACHE_FILE, json_encode($cacheData));
+
+    // Devuelve los datos cargados.
+    return $data;
+}
+</code></pre>
+<h4>Características principales:</h4>
+<div style="margin:1rem">
+  <ul>
+  <li><strong>Validación de archivo fuente</strong>: Verifica que el archivo de datos (<code>COMPANY_DATA_PATH</code>) exista. Si no, lanza una excepción clara para facilitar la depuración.</li>
+  <li><strong>Gestión de caché inteligente</strong>:
+    <ul style="margin-left: 20px;">
+      <li>Utiliza una clave de caché única generada a partir del hash del nombre del archivo y su última fecha de modificación.</li>
+      <li>Soporte para almacenamiento en caché con APCu (si está habilitado).</li>
+      <li>Uso de un archivo de caché local (<code>COMPANY_CACHE_FILE</code>) como respaldo cuando APCu no está disponible o en caso de reinicio del servidor.</li>
+    </ul>
+  </li>
+  <li><strong>Decodificación segura de JSON</strong>: Verifica errores al decodificar el contenido del archivo JSON y lanza una excepción detallada si ocurre un error.</li>
+  <li><strong>Persistencia de caché</strong>:
+    <ul style="margin-left: 20px;">
+      <li>Almacena los datos en la memoria (APCu) si está disponible.</li>
+      <li>Guarda una copia persistente en disco para mejorar el tiempo de respuesta en futuras cargas.</li>
+    </ul>
+  </li>
+  <li><strong>Creación automática del directorio de caché</strong>: Si la carpeta definida en <code>CACHE_PATH</code> no existe, la crea automáticamente con los permisos adecuados.</li>
+</ul>
+</div>
+
+<h4>Flujo general:</h4>
+<div style="margin:1rem">
+  <ol>
+    <li>Verifica la existencia del archivo original de datos.</li>
+    <li>Genera una clave de caché basada en el archivo y su fecha de modificación.</li>
+    <li>Intenta obtener los datos desde APCu.</li>
+    <li>Si no están en APCu, busca en un archivo de caché local.</li>
+    <li>Si no hay caché válida, carga y valida el contenido JSON directamente del archivo.</li>
+    <li>Almacena los datos en APCu y en un archivo local para futuras consultas.</li>
+    <li>Devuelve los datos como un array asociativo.</li>
+  </ol>
+</div>
+
+
+<br>
+<h4>Función: <code>clear_company_data_cache()</code></h4>
+<p>Esta función permite limpiar manualmente la caché asociada a los datos de empresa. Es útil cuando se requiere forzar la recarga de la información desde el archivo original, ya sea por cambios recientes en el contenido o durante tareas de mantenimiento.</p>
+<pre><code class="language-php">
+function clear_company_data_cache() {
+    // Si la extensión APCu está disponible, borra toda la caché de usuario almacenada en memoria.
+    if (extension_loaded('apcu')) {
+        apcu_clear_cache();  // Limpia la caché APCu para garantizar que se vuelva a cargar desde el archivo fuente.
+    }
+
+    // Si existe un archivo de caché local, lo elimina del sistema de archivos.
+    if (file_exists(COMPANY_CACHE_FILE)) {
+        unlink(COMPANY_CACHE_FILE);  // Borra el archivo de caché para forzar su regeneración.
+    }
+
+    // Devuelve true para indicar que la operación se completó correctamente.
+    return true;
+}
+</code></pre>
+
+<h4>Propósito:</h4>
+<p>Eliminar cualquier versión en caché de los datos de empresa, tanto en memoria (APCu) como en disco, asegurando que en la próxima carga se utilicen datos frescos desde la fuente.</p>
+
+<h4>Detalles de funcionamiento:</h4>
+<div style="margin:1rem">
+<ul>
+  <li><strong>Limpieza de memoria (APCu):</strong>  
+    Si la extensión <code>apcu</code> está habilitada en el servidor, la función llama a <code>apcu_clear_cache()</code> para eliminar toda la caché de usuario almacenada en memoria. Esto es especialmente útil para evitar el uso de datos obsoletos en entornos con múltiples usuarios o procesos concurrentes.
+  </li>
+  <li><strong>Eliminación del archivo de caché local:</strong>  
+    Si existe un archivo en disco definido por la constante <code>COMPANY_CACHE_FILE</code>, se elimina usando <code>unlink()</code>. Esto garantiza que el sistema de caché en archivo también se regenere con la información actualizada.
+  </li>
+  <li><strong>Retorno:</strong>  
+    La función siempre devuelve <code>true</code>, indicando que el proceso de limpieza se ejecutó correctamente, sin importar si había o no datos previamente almacenados.
+  </li>
+</ul>
+</div>
+
+
+<br>
+<h4>Función: <code>testAPIConnection()</code></h4>
+<p>Esta función realiza una prueba de conectividad con la API configurada para verificar si está operativa y respondiendo correctamente.</p>
+<pre><code class="language-php">
+function testAPIConnection() {
+    // Estructura del mensaje de prueba para el modelo especificado
+    $testPayload = [
+        'model' => MODEL, // Modelo definido en la configuración
+        'messages' => [
+            ['role' => 'system', 'content' => 'Eres un asistente útil'],
+            ['role' => 'user', 'content' => 'Responde con OK si estás funcionando']
+        ],
+        'temperature' => TEMPERATURE,  // Nivel de creatividad en la respuesta
+        'max_tokens' => 50             // Límite de tokens en la respuesta
+    ];
+
+    // Inicializa cURL para realizar la solicitud HTTP
+    $ch = curl_init(API_URL);
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,              // Retorna la respuesta como string
+        CURLOPT_POST => true,                        // Método POST
+        CURLOPT_POSTFIELDS => json_encode($testPayload), // Convierte los datos a JSON
+        CURLOPT_HTTPHEADER => [
+            'Content-Type: application/json',
+            'Authorization: Bearer ' . API_KEY        // Autenticación con token
+        ],
+        CURLOPT_TIMEOUT => 15,                       // Tiempo máximo de espera en segundos
+        CURLOPT_SSL_VERIFYPEER => true               // Verifica el certificado SSL
+    ]);
+
+    // Ejecuta la solicitud y captura la respuesta
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $error = curl_error($ch);
+    curl_close($ch);
+
+    // Devuelve un arreglo con información de estado y datos de respuesta
+    return [
+        'success' => $httpCode === 200, // Éxito si el código HTTP es 200
+        'http_code' => $httpCode,       // Código de respuesta HTTP
+        'response' => $response,        // Cuerpo de la respuesta (JSON)
+        'error' => $error               // Mensaje de error en caso de fallo
+    ];
+}
+</code></pre>
+<h4>Propósito:</h4>
+<p>Enviar un mensaje de prueba al modelo definido y comprobar que la API responde correctamente, típicamente con una respuesta simple como <code>"OK"</code>.</p>
+
+<h4>Detalles de funcionamiento:</h4>
+<div style="margin:1rem">
+<ul>
+  <li><strong>Mensaje de prueba:</strong>
+    Se prepara un payload con un mensaje estructurado para el modelo definido en la constante <code>MODEL</code>. Incluye un mensaje de sistema y una solicitud del usuario que espera como respuesta la palabra <code>"OK"</code>.
+  </li>
+  <li><strong>Configuración de la solicitud:</strong>
+    Se utiliza <code>cURL</code> para enviar la solicitud HTTP POST a la URL definida por <code>API_URL</code>. La autenticación se realiza mediante token usando la constante <code>API_KEY</code>.
+  </li>
+  <li><strong>Parámetros de la solicitud:</strong>
+    <ul style="margin-left: 20px;">
+      <li><code>temperature</code>: nivel de creatividad en la respuesta, definido por <code>TEMPERATURE</code>.</li>
+      <li><code>max_tokens</code>: límite de tokens de la respuesta, establecido en 50.</li>
+      <li><code>CURLOPT_TIMEOUT</code>: 15 segundos de espera máxima.</li>
+      <li><code>CURLOPT_SSL_VERIFYPEER</code>: habilitado para verificar la seguridad del certificado SSL.</li>
+    </ul>
+  </li>
+  <li><strong>Respuesta:</strong>
+    Una vez ejecutada la solicitud, se captura la respuesta, el código HTTP y cualquier error producido por <code>cURL</code>. Esta información se devuelve en forma de array.
+  </li>
+</ul>
+</div>
+
+<h4>Retorno:</h4>
+<p>Un array que contiene:</p>
+<div style="margin:1rem">
+<ul>
+  <li><code>success</code>: <code>true</code> si la respuesta HTTP fue 200.</li>
+  <li><code>http_code</code>: el código HTTP recibido.</li>
+  <li><code>response</code>: el contenido del cuerpo de la respuesta (en JSON).</li>
+  <li><code>error</code>: mensaje de error si la conexión falló.</li>
+</ul>
+</div>
+
+<br>
+<h4>Función: <code>callAIModelAPI()</code></h4>
+<p>Esta función realiza una llamada a una API de modelo de lenguaje (como OpenAI) para generar una respuesta contextualizada basada en datos específicos de una empresa. Utiliza cURL para enviar una solicitud JSON que incluye tanto el historial de conversación como los datos de empresa.</p>
+<pre><code class="language-php">
+function callAIModelAPI($prompt) {
+    try {
+        // Cargar los datos de la empresa desde el archivo de datos.
+        $companyData = load_company_data();
+
+        // Construir los mensajes iniciales para la API, que incluyen el contexto sobre la empresa.
+        $messages = [
+            [
+                'role' => 'system',
+                'content' => sprintf(
+                    'Eres un asistente virtual que responde preguntas sobre una empresa. '.
+                    'Solo debes responder preguntas relacionadas con la empresa. '.
+                    'Mantén tus respuestas claras y concisas. '.
+                    'Si no sabes la respuesta, di que no tienes esa información. '.
+                    'Datos de la empresa: %s',
+                    json_encode($companyData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+                )
+            ]
+        ];
+
+        // Incluir el historial de mensajes de la sesión, si está disponible.
+        if (!empty($_SESSION['chat_history'])) {
+            foreach ($_SESSION['chat_history'] as $msg) {
+                $messages[] = [
+                    'role' => $msg['role'],
+                    'content' => $msg['content']
+                ];
+            }
+        }
+
+        // Añadir el mensaje del usuario al historial.
+        $messages[] = ['role' => 'user', 'content' => $prompt];
+
+        // Preparar los datos para la solicitud POST a la API.
+        $postData = [
+            'model' => MODEL,
+            'messages' => $messages,
+            'temperature' => TEMPERATURE,
+            'max_tokens' => MAX_TOKENS
+        ];
+
+        // Inicializar cURL para enviar la solicitud a la API.
+        $ch = curl_init(API_URL);
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,  // Devolver la respuesta como una cadena.
+            CURLOPT_POST => true,            // Usar el método POST.
+            CURLOPT_POSTFIELDS => json_encode($postData),  // Enviar los datos como JSON.
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: application/json',  // Tipo de contenido JSON.
+                'Authorization: Bearer ' . API_KEY  // Autorización con la clave API.
+            ],
+            CURLOPT_TIMEOUT => 30  // Tiempo máximo de espera para la respuesta.
+        ]);
+
+        // Ejecutar la solicitud cURL.
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);  // Obtener el código de estado HTTP.
+
+        // Comprobar si ocurrió algún error durante la solicitud cURL.
+        if (curl_errno($ch)) {
+            throw new Exception("Error CURL: " . curl_error($ch));
+        }
+        curl_close($ch);  // Cerrar la sesión cURL.
+
+        // Verificar si la API respondió correctamente.
+        if ($httpCode !== 200) {
+            throw new Exception("API respondió con código HTTP $httpCode");
+        }
+
+        // Decodificar la respuesta JSON de la API.
+        $responseData = json_decode($response, true);
+
+        // Verificar que la respuesta contiene el contenido esperado.
+        if (!isset($responseData['choices'][0]['message']['content'])) {
+            throw new Exception("Respuesta inesperada de la API");
+        }
+
+        // Devolver el contenido generado por el modelo.
+        return $responseData['choices'][0]['message']['content'];
+
+    } catch (Exception $e) {
+        // Registrar el error en el log de errores para su depuración.
+        error_log("Error en callAIModelAPI: " . $e->getMessage());
+        return false;  // Devolver false en caso de error.
+    }
+}
+</code></pre>
+
+<h4>Propósito:</h4>
+<p>Enviar una solicitud a la API del modelo con un contexto empresarial y un historial de conversación, obteniendo como resultado una respuesta generada en lenguaje natural.</p>
+
+<h4>Flujo de funcionamiento:</h4>
+<div style="margin:1rem">
+<ul>
+  <li><strong>Carga de datos:</strong>
+    <ul style="margin-left: 20px;">
+      <li>Se cargan los datos de la empresa mediante la función <code>load_company_data()</code>.</li>
+      <li>Estos datos se codifican en formato JSON y se incluyen en el mensaje de sistema como contexto.</li>
+    </ul>
+  </li>
+  <li><strong>Mensajes:</strong>
+    <ul style="margin-left: 20px;">
+      <li>El mensaje de sistema establece las reglas del asistente (solo responder sobre la empresa, respuestas claras, etc.).</li>
+      <li>Se incluyen mensajes previos desde <code>$_SESSION['chat_history']</code> si están disponibles.</li>
+      <li>Se agrega el mensaje actual del usuario recibido como parámetro <code>$prompt</code>.</li>
+    </ul>
+  </li>
+  <li><strong>Configuración y envío de la solicitud:</strong>
+    <ul style="margin-left: 20px;">
+      <li>Se prepara el array <code>$postData</code> con el modelo, mensajes, temperatura y límite de tokens.</li>
+      <li>Se inicializa y configura <code>cURL</code> para enviar la solicitud POST con autenticación vía <code>API_KEY</code>.</li>
+    </ul>
+  </li>
+  <li><strong>Manejo de errores:</strong>
+    <ul style="margin-left: 20px;">
+      <li>Se verifica si <code>cURL</code> devuelve errores o si el código HTTP es distinto de 200.</li>
+      <li>En caso de error, se lanza una excepción que es registrada con <code>error_log()</code>.</li>
+    </ul>
+  </li>
+  <li><strong>Respuesta:</strong>
+    <ul style="margin-left: 20px;">
+      <li>Se decodifica la respuesta JSON.</li>
+      <li>Si el contenido esperado existe, se retorna como string.</li>
+      <li>En caso contrario, se retorna <code>false</code>.</li>
+    </ul>
+  </li>
+</ul>
+</div>
+
+<h4>Parámetros:</h4>
+<div style="margin:1rem">
+<ul>
+  <li><code>$prompt</code>: Cadena de texto con la pregunta o instrucción del usuario.</li>
+</ul>
+</div>
+
+<h4>Retorno:</h4>
+<div style="margin:1rem">
+<ul>
+  <li><code>string</code>: La respuesta generada por el modelo de lenguaje.</li>
+  <li><code>false</code>: Si ocurre algún error durante la ejecución.</li>
+</ul>
+</div>
+
+
+<br>
+<h3>Controlador principal del backend</h3>
+<p>Este bloque de código es el controlador principal del backend para manejar peticiones a un chatbot que responde preguntas sobre una empresa. Aquí está el resumen de cómo funciona, con explicaciones claras por sección:</p>
+<h4>Encabezado de respuesta JSON</h4>
+<pre><code class="language-php">
+header('Content-Type: application/json');
+</code></pre>
+<p>Asegura que todas las respuestas que devuelve este script sean en formato JSON.</p>
+
+<h4>Acciones GET: Test y limpiar caché</h4>
+
+<div style="margin:1rem">
+  <ul>
+    <li><code>?test_connection</code>: Llama a una función que prueba si la API de IA responde correctamente.</li>
+    <li><code>?clear_cache=true</code>: Limpia el caché de los datos de la empresa (útil si los datos se actualizan).</li>
+  </ul>
+</div>
+<h4>Valida que solo se acepten solicitudes POST</h4>
+<pre><code class="language-php">
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    throw new Exception("Método no permitido", 405);
+}
+</code></pre>
+<p>Evita que otros métodos (GET, PUT, DELETE) intenten ejecutar acciones que requieren seguridad y estructura POST.</p>
+
+<h4>Validación de acción POST</h4>
+<pre><code class="language-php">
+if (empty($_POST['action'])) {
+    throw new Exception("Acción no especificada", 400);
+}
+</code></pre>
+<p>Se asegura de que cada petición POST indique qué acción se desea realizar (send_message, load_history, etc.).</p>
+
+<h4>Lógica para cada acción:</h4>
+<pre><code class="language-php">
+switch ($action)
+</code></pre>
+<div style="margin:1rem">
+<ul>
+  <li><strong>send_message</strong>
+    <ul style="margin-left: 20px;">
+      <li>Envía un mensaje del usuario.</li>
+      <li>Llama a <code>callAIModelAPI($userMessage)</code> para obtener respuesta del modelo.</li>
+      <li>Guarda tanto el mensaje del usuario como la respuesta del modelo en <code>$_SESSION['chat_history']</code>.</li>
+    </ul>
+  </li>
+  <li><strong>load_history</strong>
+    <ul style="margin-left: 20px;">
+      <li>Devuelve todo el historial de conversación almacenado en la sesión actual.</li>
+    </ul>
+  </li>
+  <li><strong>clear_history</strong>
+    <ul style="margin-left: 20px;">
+      <li>Limpia todo el historial de la sesión.</li>
+    </ul>
+  </li>
+  <li><strong>Acción no válida</strong>
+    <ul style="margin-left: 20px;">
+      <li>Si se pasa un action desconocido, lanza un error 400.</li>
+    </ul>
+  </li>
+</ul>
+</div>
+
+<h4>Manejo de errores</h4>
+<pre><code class="language-php">
+http_response_code($e->getCode() ?: 500);
+</code></pre>
+<p>Captura cualquier excepción, devuelve un error en formato JSON y establece el código HTTP adecuado (400, 405, 500, etc.).</p>
+
+</section>
+
+
+
+
+
+
+
+
+
+        <!-- Guia HTML -->
+        <section id="html-guia" class="doc-section">
+          <h2><i class="fas fa-code"></i> Guía HTML</h2>
+          <p>
+            El chatbot está compuesto por tres componentes principales: un
+            mensaje de invitación, un botón de toggle y el contenedor principal
+            del chat.
+          </p>
+          <ul class="feature-list">
+            <li>
+              <strong>Mensaje de invitación (chatbot-invite):</strong> Un
+              elemento simple que muestra el texto "¡Chatea con nosotros!"
+            </li>
+            <li>
+              <strong>Botón de Toggle (chatbot-toggle):</strong> Contiene una
+              imagen del icono del chatbot (50x50px) con efecto de zoom
+            </li>
+            <li>
+              <strong>Contenedor Principal (chatbot-container):</strong>
+              Inicialmente oculto, dividido en tres secciones (encabezado, área
+              de mensajes y pie de chat)
+            </li>
+          </ul>
+          <h3>Estructura básica</h3>
+          <div class="code-example">
+            <div id="html-example" class="tab-content" style="display: block">
+              <pre><code class="language-html">
+  &lt;!-- Mensaje de invitación para iniciar el chat --&gt;
+  &lt;div id="chatbot-invite" class="chatbot-invite"&gt;
+    &lt;span&gt;¡Chatea con nosotros!&lt;/span&gt;
+  &lt;/div&gt;
+  
+  &lt;!-- Botón para abrir/cerrar el chatbot --&gt;
+  &lt;div id="chatbot-toggle" class="chatbot-toggle"&gt;
+    &lt;img
+      src="./chatbot/img/chatbot.png"
+      width="50"
+      height="50"
+      alt="chatbot"
+      class="img-zoom"
+    /&gt;
+  &lt;/div&gt;
+  
+  &lt;!-- Contenedor principal del chatbot --&gt;
+  &lt;div id="chatbot-container" class="chatbot-container hidden"&gt;
+    &lt;!-- Encabezado del chatbot --&gt;
+    &lt;div class="chatbot-header"&gt;
+      &lt;span style="display: inline-flex; align-items: center; gap: 8px"&gt;
+        &lt;img
+          src="./chatbot/img/chatbot.png"
+          width="50"
+          height="50"
+          alt="chatbot"
+          class="img-zoom"
+        /&gt;
+        &lt;span&gt;Tu Asistente Virtual&lt;/span&gt;
+      &lt;/span&gt;
+      &lt;button id="chatbot-close" class="chatbot-close"&gt;
+        &lt;i class="fa-solid fa-circle-xmark"&gt;&lt;/i&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  
+    &lt;!-- Área de mensajes --&gt;
+    &lt;div id="chatbot-messages" class="chatbot-messages"&gt;
+      &lt;!-- Aquí se renderizan los mensajes --&gt;
+    &lt;/div&gt;
+  
+    &lt;!-- Pie del chatbot con campo de entrada y botón de enviar --&gt;
+    &lt;div class="chatbot-footer"&gt;
+      &lt;button class="clear-history-btn"&gt;
+        &lt;i class="fa-regular fa-trash-can" title="Limpiar Chat"&gt;&lt;/i&gt;
+      &lt;/button&gt;
+      &lt;input
+        type="text"
+        id="chatbot-input-field"
+        class="chatbot-input-field"
+        placeholder="Escribe tu mensaje..."
+        autofocus
+      /&gt;
+      &lt;button id="chatbot-send" class="chatbot-send"&gt;
+        &lt;i class="fas fa-paper-plane"&gt;&lt;/i&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  </code></pre>
+
+  <p>
+                A continuación, se presenta una explicación detallada tanto del
+                HTML como del CSS proporcionados, con el objetivo de facilitar
+                la documentación y comprensión de su funcionalidad y diseño.
+              </p>
+              <h3>1. Estructura HTML</h3>
+              <p>
+                El código HTML representa un chatbot interactivo que incluye
+                elementos para la invitación, el contenedor principal del chat,
+                el área de mensajes y el pie con funcionalidades adicionales.
+              </p>
+              <p><b>Elementos principales:</b></p>
+              <p>
+                1.1 Mensaje de invitación (<span style="color: red"
+                  >#chatbot-invite</span
+                >)
+              </p>
+              <pre><code class="language-html">
+  &lt;div id="chatbot-invite" class="chatbot-invite"&gt;
+    &lt;span&gt;¡Chatea con nosotros!&lt;/span&gt;
+  &lt;/div&gt;
+  </code></pre>
+              <div style="margin:1rem">
+                <ul>
+                <li>
+                  Este elemento es un mensaje flotante que anima a los usuarios
+                  a iniciar una conversación.
+                </li>
+                <li>
+                  Contiene un texto simple ("¡Chatea con nosotros!") que se
+                  muestra de manera condicional (visible u oculta) según la
+                  interacción del usuario.
+                </li>
+              </ul>
+              </div>
+              <br />
+              <p>
+                1.2 Botón para abrir/cerrar el chatbot (<span style="color: red"
+                  >#chatbot-toggle</span
+                >)
+              </p>
+              <pre><code class="language-html">
+  &lt;div id="chatbot-toggle" class="chatbot-toggle"&gt;
+    &lt;img src="./chatbot/img/chatbot.png" width="50" height="50" alt="chatbot" class="img-zoom" /&gt;
+  &lt;/div&gt;
+  </code></pre>
+  <div style="margin:1rem">
+              <ul>
+                <li>
+                  Este botón permite abrir o cerrar el contenedor principal del
+                  chatbot.
+                </li>
+                <li>
+                  Utiliza una imagen representativa del chatbot con efecto de
+                  zoom al pasar el cursor sobre ella (class="img-zoom").
+                </li>
+              </ul>
+            </div>
+              <br />
+              <p>
+                1.3 Contenedor principal del chatbot (<span style="color: red"
+                  >#chatbot-container</span
+                >)
+              </p>
+              <pre><code class="language-html">
+  &lt;div id="chatbot-container" class="chatbot-container hidden"&gt;
+    &lt;!-- Encabezado --&gt;
+    &lt;div class="chatbot-header"&gt;
+      &lt;span&gt;
+        &lt;img src="./chatbot/img/chatbot.png" width="50" height="50" alt="chatbot" class="img-zoom" /&gt;
+        &lt;span&gt;Tu Asistente Virtual&lt;/span&gt;
+      &lt;/span&gt;
+      &lt;button id="chatbot-close" class="chatbot-close"&gt;
+        &lt;i class="fa-solid fa-circle-xmark"&gt;&lt;/i&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  
+    &lt;!-- Área de mensajes --&gt;
+    &lt;div id="chatbot-messages" class="chatbot-messages"&gt;
+      &lt;!-- Aquí se renderizan los mensajes --&gt;
+    &lt;/div&gt;
+  
+    &lt;!-- Pie del chatbot --&gt;
+    &lt;div class="chatbot-footer"&gt;
+      &lt;button class="clear-history-btn"&gt;
+        &lt;i class="fa-regular fa-trash-can" title="Limpiar Chat"&gt;&lt;/i&gt;
+      &lt;/button&gt;
+      &lt;input type="text" id="chatbot-input-field" class="chatbot-input-field" 
+      placeholder="Escribe tu mensaje..." autofocus /&gt;
+      &lt;button id="chatbot-send" class="chatbot-send"&gt;
+        &lt;i class="fas fa-paper-plane"&gt;&lt;/i&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  </code></pre>
+              <p>
+                <b>Encabezado (<code>chatbot-header</code>):</b>
+                <div style="margin:1rem">
+                <ul>
+                  <li>
+                    Contiene una imagen del chatbot y un título ("Tu Asistente Virtual").
+                  </li>
+                  <li>
+                    Incluye un botón de cierre (<code>chatbot-close</code>) con un ícono de "X".
+                  </li>
+                </ul>
+                </div>
+              </p>
+              <p>
+                <b> Área de mensajes (<code>chatbot-messages</code>):</b>
+                <div style="margin:1rem">
+                <ul>
+                  <li>Es un contenedor dinámico donde se renderizan los mensajes enviados por el usuario y las respuestas del bot.</li>
+                  <li>Los mensajes se organizan en una estructura flexible (<code>flex-direction: column)</code> con espacio entre ellos.</li>
+                </ul>
+                </div>
+              </p>
+              <p>
+                <b>Pie del chatbot (<code>chatbot-footer</code>):</b>
+                <div style="margin:1rem">
+                <ul>
+                  <li>Incluye un botón para limpiar el historial de chat (<code>clear-history-btn</code>).</li>
+                  <li>Un campo de entrada (<code>chatbot-input-field</code>) para escribir mensajes.</li>
+                  <li>Un botón de envío (<code>chatbot-send</code>) con un ícono de avión de papel.</li>
+                </ul>
+                </div>
+              </p>
+            </div>
+
+              
+
+          </div>
+        </section>
+
+        <section id="css-guia" class="doc-section">
+          <h2><i class="fab fa-css3-alt"></i> Guía CSS</h2>
+          <p>
+            El CSS define la apariencia visual y las animaciones del chatbot, asegurando una experiencia de usuario fluida y atractiva.
+          </p>
+
+          <h3>Mensaje de invitación inicial</h3>
+          <p>Este fragmento de código CSS define los estilos visuales para el mensaje de invitación inicial del chatbot, que aparece de forma discreta pero llamativa en la esquina inferior derecha del sitio web.</p>
+
+<pre><code class="language-css">
+.chatbot-invite {
+  position: fixed;
+  bottom: 60px;
+  right: 80px;
+  background: linear-gradient(to right, #235ee8, #4d80ee);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  border-bottom-right-radius: 5px;
+  font-size: 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  transform: translateY(10px);
+}
+
+/* Clase activa para mostrar el mensaje de invitación */
+.chatbot-invite.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Ajuste para dispositivos móviles */
+@media (max-width: 768px) {
+  .chatbot-invite {
+    bottom: 70px;
+    right: 20px;
+    font-size: 13px;
+  }
+}
+  </code></pre>
+  <h4>Clase auxiliar: <code>.chatbot-invite</code></h4>
+  <p>Este elemento tiene como objetivo invitar al usuario a iniciar una conversación con el chatbot. Sus principales características son:</p>
+  
+
+  <div style="margin:1rem">
+    <ul>
+      <li><b>Posición fija:</b> ubicado en la parte inferior derecha (bottom: 60px; right: 80px), siempre visible incluso al hacer scroll.</li>
+      <li><b>Diseño atractivo:</b> utiliza un degradado de color azul para captar la atención del usuario.</li>
+      <li><b>Estilo moderno:</b> con bordes redondeados, sombra y tipografía clara y pequeña.</li>
+      <li><b>Aparición con animación:</b> inicialmente oculto con opacity: 0 y visibility: hidden, pero al añadirse la clase .visible, se anima suavemente hacia su posición final mediante transform y transition.</li>
+    </ul>
+  </div>
+  <h4>Clase auxiliar: <code>.chatbot-invite.visible</code></h4>
+
+<p>Esta clase activa la visibilidad del mensaje, permitiendo que aparezca con una animación de entrada (<code>opacity: 1, transform: translateY(0)</code>), haciendo que la invitación sea más dinámica e intuitiva para el usuario.</p>
+
+<h4>Responsividad</h4>
+<p>Incluye una media query para pantallas pequeñas (≤768px), ajustando la posición y el tamaño del texto para garantizar una buena experiencia en dispositivos móviles:
+</p>
+<div style="margin:1rem">
+    <ul>
+      <li>Posición más accesible (bottom: 70px; right: 20px).</li>
+      <li>Texto ligeramente más pequeño (font-size: 13px).</li>
+    </ul>
+  </div>
+
+<br>
+<h3>Estilos de mensajes (error, typing, etc.)</h3>
+<p>Esta sección del archivo CSS define los estilos visuales para diferentes tipos de mensajes del chatbot, como errores, estados de escritura y sugerencias de reintento. Los estilos están diseñados para mejorar la experiencia del usuario y proporcionar una comunicación clara sobre el estado del sistema.</p>
+<pre><code class="language-css">
+.error-message {
+  background-color: #ffebee;
+  border-left: 4px solid #f44336;
+}
+
+.retry-text {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 5px !important;
+  font-style: italic;
+}
+
+.typing-message {
+  background-color: #f5f5f5;
+  color: #333;
+}
+</code></pre>
+
+<h4>Error</h4>
+<p>Estilo utilizado para mostrar mensajes de error (por ejemplo, fallos en la conexión o respuestas inválidas)
+</p>
+<h4>Reintentar texto</h4>
+<p>Texto complementario que sugiere al usuario intentar de nuevo después de un error
+</p>
+<h4>Typing</h4>
+<p>Indica visualmente que el chatbot está escribiendo una respuesta
+</p>
+
+
+
+<br>
+<h3>Contenedor principal del chatbot</h3>
+<p>Esta sección define el estilo base y comportamiento visual del contenedor principal del chatbot, encargado de alojar toda la interfaz de conversación con el usuario.</p>
+<pre><code class="language-css">
+#chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 400px;
+  height: 600px;
+  max-height: 80vh;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;
+  border: 1px solid #e1e1e1;
+  transition: all 0.3s ease;
+}
+
+/* Estado oculto del chatbot */
+#chatbot-container.hidden {
+  transform: translateY(20px);
+  opacity: 0;
+  visibility: hidden;
+}
+</code></pre>
+
+<p>Contenedor fijo y flotante que aparece en la esquina inferior derecha de la pantalla:</p>
+<div style="margin:1rem">
+    <ul>
+      <li>Posición fija (<code>fixed</code>) en la parte inferior-derecha (<code>bottom: 20px; right: 20px</code>) para mantenerlo visible mientras el usuario navega.</li>
+      <li>Dimensiones predeterminadas de 400x600px y un <code>max-height</code> de <code>80vh</code> para asegurar buena visualización en diferentes pantallas.</li>
+    </ul>
+  </div>
+
+<br>
+<h3>Encabezado del chatbot</h3>
+<p>Esta sección define los estilos visuales del encabezado superior del chatbot, donde se presenta el título o mensaje de bienvenida y el botón para cerrarlo.</p>
+<pre><code class="language-css">
+.chatbot-header {
+  background: linear-gradient(to right, #235ee8, #4d80ee);
+  color: white;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wellcome {
+  margin-top: 20px;
+}
+
+.chatbot-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+</code></pre>
+<p>Contenedor principal del encabezado del chatbot, diseñado para destacar y facilitar la interacción del usuario</p>
+
+
+<br>
+<h3>Área de mensajes</h3>
+<p>Esta sección define los estilos del área donde se visualizan las conversaciones entre el usuario y el chatbot, incluyendo mensajes, burbujas, y estados como “escribiendo...”.</p>
+<pre><code class="language-css">
+.chatbot-header {
+  background: linear-gradient(to right, #235ee8, #4d80ee);
+  color: white;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wellcome {
+  margin-top: 20px;
+}
+
+.chatbot-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+</code></pre>
+<p>Cada burbuja está diseñada para mantener una conversación clara y visualmente coherente, con una interfaz limpia que simula una experiencia de chat moderna y accesible tanto en escritorio como en móviles.</p>
+
+
+<br>
+<h3>Indicador de "escribiendo..."", destacando que visualmente son 3 puntos animados</h3>
+<p>Esta sección define la animación visual que indica cuando el chatbot está escribiendo una respuesta. Se compone de tres puntos animados que simulan el clásico efecto de "escribiendo..." en interfaces de mensajería.</p>
+<pre><code class="language-css">
+.typing-indicator {
+  display: flex;
+  gap: 5px;
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  background: #666;
+  border-radius: 50%;
+  animation: typingAnimation 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typingAnimation {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-5px);
+  }
+}
+</code></pre>
+<p>Este componente mejora la experiencia del usuario, transmitiendo que el sistema está procesando la información antes de responder. El diseño es simple, ligero y perfectamente adaptable a cualquier estilo de chatbot.</p>
+
+
+<br>
+<h3>Pie del Chatbot (Input y Botones)</h3>
+<p>Esta sección define el área inferior del chatbot, que permite al usuario escribir y enviar mensajes. Incluye un campo de entrada de texto y un botón de envío estilizado.</p>
+<pre><code class="language-css">
+.chatbot-footer {
+  padding: 10px;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 5px;
+}
+
+.chatbot-input-field {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  outline: none;
+  transition: none !important;
+}
+
+.chatbot-send {
+  background: linear-gradient(to right, #235ee8, #4d80ee);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+</code></pre>
+<p>Este pie de conversación proporciona una experiencia de usuario clara y accesible, combinando diseño limpio y funcionalidad esencial para facilitar el envío de mensajes en el chatbot.</p>
+
+
+<br>
+<h3>Pie del Chatbot (Input y Botones)</h3>
+<p>Esta sección define el área inferior del chatbot, que permite al usuario escribir y enviar mensajes. Incluye un campo de entrada de texto y un botón de envío estilizado.</p>
+<pre><code class="language-css">
+.chatbot-footer {
+  padding: 10px;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 5px;
+}
+
+.chatbot-input-field {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  outline: none;
+  transition: none !important;
+}
+
+.chatbot-send {
+  background: linear-gradient(to right, #235ee8, #4d80ee);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+</code></pre>
+<p>Este pie de conversación proporciona una experiencia de usuario clara y accesible, combinando diseño limpio y funcionalidad esencial para facilitar el envío de mensajes en el chatbot.</p><br>
+
+<br>
+<h3>Botón Toggle (Abrir/Cerrar Chatbot)</h3>
+<p>Esta sección define el botón flotante que permite al usuario abrir o cerrar la interfaz del chatbot. Su diseño circular y color llamativo aseguran una visibilidad óptima sin interferir con el contenido principal de la página.</p>
+<pre><code class="language-css">
+.chatbot-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(to right, #235ee8, #4d80ee);
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+
+.chatbot-toggle svg {
+  fill: #bd04f5;
+}
+</code></pre>
+<p>Este botón de toggle es esencial para brindar una experiencia accesible y moderna, permitiendo que el usuario controle fácilmente la visibilidad del chatbot desde cualquier lugar de la pantalla.</p>
+
+
+<br>
+<h3>Efecto Hover en Imágenes</h3>
+<p>Esta sección proporciona una animación visual sutil pero efectiva para imágenes dentro del chatbot (o cualquier sección del sitio) al aplicar un efecto de zoom al pasar el cursor.</p>
+<pre><code class="language-css">
+.img-zoom {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.img-zoom:hover {
+  transform: scale(1.1);
+}
+</code></pre>
+<p>Este efecto mejora la experiencia de usuario al hacer que las imágenes sean más dinámicas e interactivas, ideal para miniaturas, respuestas visuales del chatbot o elementos gráficos destacados.</p>
+
+
+<br>
+<h3>Botón de Limpiar Historial</h3>
+<p>Esta sección define los estilos visuales del botón que permite al usuario eliminar el historial del chat, proporcionando una acción clara y destacada.</p>
+<pre><code class="language-css">
+.clear-history-btn {
+  background: red;
+  color: rgb(255, 255, 255);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-right: auto;
+  font-size: 1rem;
+}
+</code></pre>
+<p>Este botón debe ser utilizado con precaución y estar claramente identificado, ya que está asociado a la eliminación de datos. Puede incluirse un ícono de papelera o texto como “🗑️” para reforzar su función.</p>
+
+
+<br>
+<h3>Estilos Avanzados de Texto</h3>
+<p>Esta sección proporciona formateo enriquecido para el contenido textual de los mensajes, permitiendo que los mensajes del chatbot incluyan títulos, listas, bloques de código, citas y enlaces de forma legible y elegante.</p>
+<pre><code class="language-css">
+.message-content {
+  word-wrap: break-word;
+}
+
+.message-content p {
+  margin: 0;
+}
+
+.message-content {
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.message-content h1,
+.message-content h2,
+.message-content h3,
+.message-content h4,
+.message-content h5,
+.message-content h6 {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+
+.message-content ul,
+.message-content ol {
+  margin-bottom: 1em;
+  padding-left: 2em;
+}
+
+.message-content blockquote {
+  border-left: 3px solid #ddd;
+  padding-left: 1em;
+  margin-left: 0;
+  color: #777;
+}
+
+.message-content pre {
+  background: #f5f5f5;
+  padding: 1em;
+  border-radius: 3px;
+  overflow-x: auto;
+}
+
+.message-content code {
+  background: #f5f5f5;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: monospace;
+}
+
+.message-content a {
+  color: linear-gradient(to right, #235ee8, #4d80ee);
+  text-decoration: none;
+}
+
+.message-content a:hover {
+  text-decoration: underline;
+}
+</code></pre>
+<p>Estos estilos permiten que los mensajes del chatbot presenten contenido complejo y estructurado de manera profesional, facilitando la lectura y comprensión por parte del usuario.</p>
+
+
+<br>
+<h3>Responsive Design para Dispositivos Móviles</h3>
+<p>Esta sección adapta la interfaz del chatbot para ofrecer una experiencia óptima en pantallas pequeñas, como smartphones o tablets. El diseño se ajusta automáticamente cuando el ancho de la pantalla es de 768 píxeles o menos.</p>
+<pre><code class="language-css">
+@media (max-width: 768px) {
+  #chatbot-container {
+    width: 95vw !important;
+    height: 80vh !important;
+    max-height: 80vh !important;
+    right: 2.5vw !important;
+    bottom: 10px !important;
+    left: auto !important;
+    border-radius: 10px !important;
+  }
+
+  .chatbot-messages {
+    padding: 10px 8px !important;
+  }
+
+  .user-message,
+  .bot-message {
+    max-width: 90% !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+  }
+
+  .chatbot-toggle {
+    width: 50px !important;
+    height: 50px !important;
+    bottom: 10px !important;
+    right: 10px !important;
+  }
+
+  .chatbot-input-field {
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+  }
+
+  .chatbot-send {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  .chatbot-header span {
+    font-size: 16px !important;
+  }
+}
+</code></pre>
+<p>Con estos estilos, el chatbot mantiene usabilidad, estética y funcionalidad en dispositivos móviles, proporcionando una experiencia fluida sin importar el tamaño de pantalla.</p>
+
+        </section>
+
+
+<!-- Guia JS-->
+<section id="js-guia" class="doc-section">
+  <h2><i class="fab fa-js-square"></i> Guía JavaScript</h2>
+  <p>
+  El archivo JavaScript proporcionado implementa la lógica interactiva para un chatbot en el frontend. A continuación, se presenta una explicación detallada de las principales secciones del código:
+  </p>
+<h3>Objeto Principal del Chatbot</h3>
+<p>Este bloque define la estructura base y el estado del chatbot a través de un objeto principal llamado chatbot. Este patrón modular permite gestionar el comportamiento, la lógica y la interacción del chatbot de manera centralizada y ordenada.</p>
+<pre><code class="language-js">
+const chatbot = {
+  elements: {
+    toggle: document.getElementById("chatbot-toggle"),
+    container: document.getElementById("chatbot-container"),
+    closeBtn: document.getElementById("chatbot-close"),
+    messages: document.getElementById("chatbot-messages"),
+    input: document.getElementById("chatbot-input-field"),
+    sendBtn: document.getElementById("chatbot-send"),
+    clearBtn: document.querySelector(".clear-history-btn"),
+  },
+  state: {
+    isOpen: false,
+    isTyping: false,
+    currentTypingAnimation: null,
+  },
+};
+</code></pre>
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Propiedad</th>
+      <th>Descripción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>toggle</code></td>
+      <td>Botón flotante para abrir/cerrar el chatbot</td>
+    </tr>
+    <tr>
+      <td><code>container</code></td>
+      <td>Contenedor principal del chatbot (<code>#chatbot-container</code>)</td>
+    </tr>
+    <tr>
+      <td><code>closeBtn</code></td>
+      <td>Botón (X) para cerrar el chatbot</td>
+    </tr>
+    <tr>
+      <td><code>messages</code></td>
+      <td>Contenedor donde se agregan los mensajes (<code>#chatbot-messages</code>)</td>
+    </tr>
+    <tr>
+      <td><code>input</code></td>
+      <td>Campo de texto para escribir mensajes</td>
+    </tr>
+    <tr>
+      <td><code>sendBtn</code></td>
+      <td>Botón para enviar el mensaje (<code>#chatbot-send</code>)</td>
+    </tr>
+    <tr>
+      <td><code>clearBtn</code></td>
+      <td>Botón para borrar el historial de mensajes (<code>.clear-history-btn</code>)</td>
+    </tr>
+  </tbody>
+</table>
+<p>Estas referencias permiten acceder rápidamente a cada componente sin hacer múltiples consultas DOM repetitivas.</p>   
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Propiedad</th>
+      <th>Tipo</th>
+      <th>Función</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>isOpen</code></td>
+      <td><code>boolean</code></td>
+      <td>Indica si el chatbot está abierto o cerrado</td>
+    </tr>
+    <tr>
+      <td><code>isTyping</code></td>
+      <td><code>boolean</code></td>
+      <td>Indica si el bot está "escribiendo" (usado para animación o retardo)</td>
+    </tr>
+    <tr>
+      <td><code>currentTypingAnimation</code></td>
+      <td><code>number</code>/<code>null</code></td>
+      <td>ID de la animación en curso (puede ser usada para cancelarla)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Este diseño orientado a objetos facilita una arquitectura modular, legible y escalable, permitiendo manejar fácilmente la interacción del usuario, el control de flujo y la manipulación dinámica del DOM.</p>   
+
+<h3>Elementos y lógica adicional de la interfaz</h3>
+<pre><code class="language-js">
+// Elementos adicionales de la UI
+const chatbotToggle = document.getElementById("chatbot-toggle");
+const chatbotInvite = document.getElementById("chatbot-invite");
+
+// Mostrar mensaje de invitación al pasar el mouse
+chatbotToggle.addEventListener("mouseenter", () => {
+  chatbotInvite.classList.add("visible");
+});
+
+// Ocultar mensaje de invitación al quitar el mouse
+chatbotToggle.addEventListener("mouseleave", () => {
+  chatbotInvite.classList.remove("visible");
+});
+
+// Mostrar mensaje de invitación temporal al cargar la página
+setTimeout(() => {
+  chatbotInvite.classList.add("visible");
+  setTimeout(() => {
+    chatbotInvite.classList.remove("visible");
+  }, 3000); // Ocultar después de 3 segundos
+}, 1000); // Mostrar 1 segundo después de cargar
+
+// Configuración de marked.js para procesar Markdown
+marked.setOptions({
+  breaks: true, // Convertir saltos de línea en <br>
+  gfm: true, // Soporte para GitHub Flavored Markdown
+  smartypants: true, // Conversión inteligente de comillas y guiones
+
+  /**
+    * Función para resaltado de sintaxis (opcional)
+    * @param {string} code - Código a resaltar
+    * @param {string} lang - Lenguaje de programación
+    * @returns {string} Código HTML resaltado
+    */
+  highlight: function (code, lang) {
+    // Requiere Prism.js para funcionar
+    if (Prism && lang && Prism.languages[lang]) {
+      return Prism.highlight(code, Prism.languages[lang], lang);
+    }
+    return code;
+  },
+});
+</code></pre>
+<p>Este bloque de código mejora la experiencia del usuario con elementos visuales e integración con Markdown:</p>
+<div style="margin:1rem">
+  <ul>
+    <li><code>chatbotToggle</code> y <code>chatbotInvite</code>:</li>
+    <p>Se obtienen referencias al botón flotante del chatbot (#chatbot-toggle) y al mensaje de invitación (#chatbot-invite), que es un pequeño texto emergente que sugiere al usuario iniciar una conversación.</p>
+    <li>Eventos de interacción (<code>hover</code>):</li>
+    <ul style="margin-left: 20px;">
+      <li>Al pasar el mouse sobre el botón (<code>mouseenter</code>), se añade la clase .visible al elemento de invitación, mostrándolo.</li>
+      <li>Al retirar el mouse (<code>mouseleave</code>), se elimina dicha clase, ocultando el mensaje.</li>
+    </ul>
+    <li>Invitación automática al cargar la página:</li>
+    <p>Se programa un setTimeout que, 1 segundo después de cargar la página, muestra el mensaje de invitación automáticamente durante 3 segundos, para captar la atención del usuario sin requerir interacción.</p>
+  </ul>
+</div>
+
+<h3>Configuración de marked.js</h3>
+<p>Se personaliza la librería marked.js para interpretar correctamente Markdown en los mensajes:</p>
+<div style="margin:1rem">
+  <ul>
+    <li><code>breaks: true</code> :Convierte saltos de línea simples (<code>\n</code>) en saltos de línea HTML (<code>&lt;br&gt</code>).</li>
+    <li><code>gfm: true</code>: Activa el soporte para GitHub Flavored Markdown (tablas, listas mejoradas, etc.).</li>
+    <li><code>smartypants: true</code>: Mejora tipográficamente los mensajes, transformando comillas rectas en comillas tipográficas y guiones en rayas.</li>
+  </ul>
+</div>
+<p>Además, se define una función de resaltado de sintaxis para bloques de código (highlight), que utiliza Prism.js si está disponible. Esto permite mostrar fragmentos de código con colores adecuados al lenguaje, mejorando la legibilidad.</p>
+
+
+<br>
+<h3>Función: <code>showMessageWithTyping(content, sender, index = null)</code></h3>
+<p>Esta función muestra un mensaje en pantalla simulando un efecto de escritura animada, similar al de los asistentes virtuales modernos.</p>
+<pre><code class="language-js">
+async function showMessageWithTyping(content, sender, index = null) {
+  return new Promise((resolve) => {
+    // Cancelar animación anterior si existe
+    if (chatbot.state.currentTypingAnimation) {
+      clearTimeout(chatbot.state.currentTypingAnimation);
+    }
+
+    // Crear elemento del mensaje
+    const messageDiv = document.createElement("div");
+    messageDiv.className = `${sender}-message`;
+    if (index !== null) messageDiv.dataset.index = index;
+
+    const contentDiv = document.createElement("div");
+    contentDiv.className = "message-content";
+    messageDiv.appendChild(contentDiv);
+
+    // Añadir al contenedor de mensajes
+    chatbot.elements.messages.appendChild(messageDiv);
+
+    let i = 0;
+    const speed = 20; // Velocidad de escritura en ms por caracter
+    const fullText = content;
+    let htmlBuffer = "";
+
+    // Función recursiva para el efecto de escritura
+    function typeWriter() {
+      if (i < fullText.length) {
+        htmlBuffer += fullText.charAt(i);
+        i++;
+        // Procesar Markdown a medida que se escribe
+        contentDiv.innerHTML = marked.parse(htmlBuffer);
+        scrollToBottom();
+        chatbot.state.currentTypingAnimation = setTimeout(typeWriter, speed);
+      } else {
+        chatbot.state.currentTypingAnimation = null;
+        resolve();
+      }
+    }
+
+    typeWriter();
+  });
+}
+</code></pre>
+<h4>Lógica y comportamiento:</h4>
+<div style="margin:1rem">
+  <ol>
+    <li><b>Control de animación activa:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Si ya hay una animación de escritura en curso (<code>chatbot.state.currentTypingAnimation</code>), se detiene con <code>clearTimeout</code> para evitar superposiciones.</li>
+    </ul>
+    <li><b>Creación del mensaje en el DOM:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Se construye un div con clase dinámica según el remitente (<code>user-message, assistant-message</code>, etc.).</li>
+      <li>Dentro se añade otro div para el contenido (<code>.message-content</code>).</li>
+      <li>Se inserta en el contenedor de mensajes del chatbot.</li>
+    </ul>
+    <li><b>Animación de escritura:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Caracter por caracter, el texto va apareciendo simulando una máquina de escribir.</li>
+      <li>Se usa <code>marked.parse()</code> para procesar y renderizar Markdown a medida que el mensaje se escribe.</li>
+    </ul>
+    <li><b>Desplazamiento automático:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Con cada carácter, se asegura que el scroll baje al final con <code>scrollToBottom()</code>.</li>
+    </ul>
+    <li><b>Resolución de la promesa:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>La función se completa (<code>resolve()</code>) una vez que el mensaje se ha mostrado completamente.</li>
+    </ul>
+  </ol>
+</div>
+<p>Esta función mejora significativamente la experiencia de usuario, generando una sensación de conversación realista, progresiva y visualmente atractiva.</p>
+
+<br>
+<h3>Función: <code>showMessageInstant(content, sender, index = null)</code></h3>
+<p>Esta función muestra un mensaje en el chat de forma inmediata, sin aplicar efectos de escritura animada.</p>
+<pre><code class="language-js">
+function showMessageInstant(content, sender, index = null) {
+  const messageDiv = document.createElement("div");
+  messageDiv.className = `${sender}-message`;
+  if (index !== null) messageDiv.dataset.index = index;
+
+  const contentDiv = document.createElement("div");
+  contentDiv.className = "message-content";
+  // Procesar Markdown
+  contentDiv.innerHTML = marked.parse(content);
+  messageDiv.appendChild(contentDiv);
+
+  chatbot.elements.messages.appendChild(messageDiv);
+
+  scrollToBottom();
+}
+</code></pre>
+<h4>Lógica y comportamiento:</h4>
+<div style="margin:1rem">
+  <ol>
+    <li><b>Construcción del mensaje:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Se crea un elemento <code>div</code> con clase dependiente del emisor (por ejemplo: <code>user-message</code> o <code>assistant-message</code>).</li>
+      <li>Si se proporciona un index, se asigna como atributo data-index.</li>
+    </ul>
+    <li><b>Procesamiento de contenido:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Se crea un contenedor interno <code>.message-content</code>.</li>
+      <li>El contenido se convierte a HTML usando <code>marked.parse()</code>, lo que permite usar Markdown.</li>
+    </ul>
+    <li><b>Inserción en el DOM:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>El mensaje se agrega directamente al contenedor de mensajes del chatbot.</li>
+    </ul>
+    <li><b>Auto scroll:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Se asegura que la vista se desplace al último mensaje con <code>scrollToBottom()</code>.</li>
+    </ul>
+  </ol>
+</div>
+
+<h3>Función: <code>sanitizeUserInput(input)</code></h3>
+<p>Esta función sanitiza la entrada del usuario con el fin de prevenir ataques XSS (<code>Cross-Site Scripting</code>) eliminando código potencialmente peligroso.</p>
+<pre><code class="language-js">
+function sanitizeUserInput(input) {
+    // Eliminar scripts y atributos de eventos peligrosos
+    return input
+      .replace(/&lt;script\b[^&lt;]*(?:(?!&lt;\/script&gt;)&lt;[^&lt;]*)*&lt;\/script&gt;/gi, "")
+      .replace(/on\w+="[^"]*"/g, "");
+}
+</code></pre>
+<h4>Lógica y comportamiento:</h4>
+<div style="margin:1rem">
+  <ol>
+    <li><b>Elimina etiquetas <code>&lt;script&gt;</code> completas:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Se usa una expresión regular que detecta bloques <code>&lt;script&gt;...&lt;/script&gt;</code> (incluyendo contenido anidado o multilineal).</li>
+      <li>Se remueven completamente para evitar ejecución de código malicioso.</li>
+    </ul>
+    <li><b>Elimina atributos de eventos peligrosos:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Como <code> onclick="...", onmouseover="..."</code>, etc.</li>
+      <li>Se detectan con <code>on\w+="..."</code> y se eliminan del texto.</li>
+    </ul>
+  </ol>
+</div>
+
+
+<h3>Función: <code>sendMessage()</code></h3>
+<p>Esta función asincrónica se encarga de enviar el mensaje del usuario al servidor, mostrarlo en pantalla, gestionar la interfaz de "<code>el bot está escribiendo</code>", y luego mostrar la respuesta del bot con animación de escritura.</p>
+<pre><code class="language-js">
+async function sendMessage() {
+  let message = chatbot.elements.input.value.trim();
+  // No hacer nada si el campo está vacío o el bot está escribiendo
+  if (!message || chatbot.state.isTyping) return;
+
+  try {
+    // Sanitizar el mensaje del usuario
+    message = sanitizeUserInput(message);
+
+    // Mostrar mensaje del usuario inmediatamente
+    showMessageInstant(message, "user");
+    chatbot.elements.input.value = "";
+    chatbot.state.isTyping = true;
+
+    // Mostrar indicador de que el bot está escribiendo
+    const typingIndicator = createTypingIndicator();
+    chatbot.elements.messages.appendChild(typingIndicator);
+    scrollToBottom();
+
+    // Enviar mensaje al servidor
+    const response = await fetch("chatbot/chatbot.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: `action=send_message&message=${encodeURIComponent(message)}`,
+    });
+
+    // Verificar si la respuesta es válida
+    if (!response.ok) {
+      throw new Error(`Error HTTP! estado: ${response.status}`);
+    }
+
+    const data = await response.json();
+    // Eliminar indicador de escritura
+    chatbot.elements.messages.removeChild(typingIndicator);
+
+    if (!data.success) {
+      throw new Error(data.error || "Error en la respuesta del servidor");
+    }
+
+    // Mostrar respuesta con efecto de escritura
+    await showMessageWithTyping(data.response, "assistant");
+  } catch (error) {
+    console.error("Error enviando mensaje:", error);
+    showMessageInstant(
+      "Error al procesar tu mensaje. Intenta nuevamente.",
+      "system"
+    );
+  } finally {
+    chatbot.state.isTyping = false;
+  }
+}
+</code></pre>
+<h4>Lógica y comportamiento:</h4>
+<div style="margin:1rem">
+  <ol>
+    <li><b>Lectura y validación del mensaje:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Se obtiene el texto desde el campo de entrada.</li>
+      <li>Si el mensaje está vacío o el bot ya está escribiendo (<code>isTyping = true</code>), no hace nada.</li>
+    </ul>
+    <li><b>Sanitización del mensaje:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Se limpia el contenido usando <code>sanitizeUserInput()</code> para evitar código malicioso.</li>
+    </ul>
+    <li><b>Muestra inmediata del mensaje del usuario:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Se llama a <code>showMessageInstant()</code> para mostrar lo que el usuario escribió.</li>
+    </ul>
+    <li><b>Envío del mensaje al servidor:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Se hace un fetch() a <code>chatbot/chatbot.php</code> usando <code>POST</code>.</li>
+      <li>Se envía el mensaje codificado en formato URL.</li>
+    </ul>
+    <li><b>Procesamiento de la respuesta:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Si la respuesta <code>HTTP</code> no es válida, lanza un error.</li>
+      <li>Si <code>data.success</code> es <code>false</code>, también lanza error con el mensaje recibido.</li>
+      <li>Si todo está bien, elimina el indicador y muestra la respuesta del bot usando <code>showMessageWithTyping()</code>.</li>
+    </ul>
+    <li><b>Manejo de errores:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Cualquier error del proceso muestra un mensaje tipo <code>system</code> indicando que ocurrió un problema.</li>
+    </ul>
+    <li><b>Restablecimiento del estado:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Independientemente del resultado, la variable <code>isTyping</code> se restablece a <code>false</code>.</li>
+    </ul>
+  </ol>
+</div>
+
+<br>
+<h3>Función: <code>loadChatHistory()</code></h3>
+<p>Esta función asincrónica se encarga de cargar y mostrar el historial completo de la conversación desde el servidor. Si no hay historial, muestra un mensaje de bienvenida del asistente.</p>
+<pre><code class="language-js">
+async function loadChatHistory() {
+  try {
+    const response = await fetch("chatbot/chatbot.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: "action=load_history",
+    });
+
+    const data = await response.json();
+
+    if (!data.success) {
+      throw new Error(data.error || "Error cargando historial");
+    }
+
+    // Limpiar contenedor de mensajes
+    chatbot.elements.messages.innerHTML = "";
+
+    if (data.history && data.history.length > 0) {
+      // Mostrar cada mensaje del historial
+      for (let i = 0; i < data.history.length; i++) {
+        const msg = data.history[i];
+        showMessageInstant(
+          msg.content,
+          msg.role === "user" ? "user" : "assistant",
+          i
+        );
+      }
+    } else {
+      // Mostrar mensaje de bienvenida si no hay historial
+      showMessageInstant("¡Hola! ¿En qué puedo ayudarte? 😊", "assistant");
+    }
+  } catch (error) {
+    console.error("Error cargando historial:", error);
+    showMessageInstant("No se pudo cargar el historial de chat", "system");
+  }
+}
+</code></pre>
+<h4>Flujo y comportamiento:</h4>
+<div style="margin:1rem">
+  <ol>
+    <li><b>Solicitud al servidor:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Envía una petición <code>POST</code> a <code>chatbot/chatbot.php</code> con el parámetro <code>action=load_history</code>.</li>
+      <li>Si el mensaje está vacío o el bot ya está escribiendo (<code>isTyping = true</code>), no hace nada.</li>
+    </ul>
+    <li><b>Procesamiento de la respuesta:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Se convierte la respuesta a <code>JSON</code>.</li>
+      <li>Si <code>data.success</code> es <code>false</code>, lanza un error.</li>
+    </ul>
+    <li><b>Limpieza del área de mensajes:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Borra cualquier contenido anterior del contenedor de mensajes (<code>chatbot.elements.messages.innerHTML = ""</code>).</li>
+    </ul>
+    <li><b>Cargar historial (si existe):</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Si <code>data.history</code> es un array válido y con contenido, recorre cada mensaje.</li>
+      <li>Usa <code>showMessageInstant()</code> para renderizar cada mensaje.</li>
+      <li>Determina el remitente (<code>user o assistant</code>) según el campo role.</li>
+    </ul>
+    <li><b>Mostrar mensaje de bienvenida (si no hay historial):</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Si no hay mensajes, muestra el <code>mensaje: "¡Hola! ¿En qué puedo ayudarte? 😊"</code> como remitente <code>assistant</code>.</li>
+    </ul>
+    <li><b>Manejo de errores:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Si ocurre algún error en la petición o el procesamiento, muestra un mensaje tipo <code>system: "No se pudo cargar el historial de chat"</code>.</li>
+    </ul>
+  </ol>
+</div>
+
+<br>
+<h3>Función: <code>createTypingIndicator()</code></h3>
+<p>Esta función crea y devuelve un indicador visual animado que representa que el asistente está escribiendo, imitando el típico efecto de "tres puntos en movimiento".</p>
+<pre><code class="language-js">
+function createTypingIndicator() {
+  const indicator = document.createElement("div");
+  indicator.className = "typing-indicator";
+
+  // Añadir puntos de animación
+  for (let i = 0; i < 3; i++) {
+    const dot = document.createElement("span");
+    dot.className = "typing-dot";
+    indicator.appendChild(dot);
+  }
+
+  return indicator;
+}
+</code></pre>
+<h4>Flujo y comportamiento:</h4>
+<div style="margin:1rem">
+  <ol>
+    <li><b>Crear contenedor principal:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Se genera un <div> con clase CSS <code>typing-indicator</code>.</li>
+    </ul>
+    <li><b>Añadir puntos animados:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Se crean tres <span> con clase <code>typing-dot</code> que se añaden al contenedor.</li>
+      <li>Estos puntos pueden ser estilizados con CSS para generar la animación de escritura (por ejemplo: aparición secuencial, parpadeo o movimiento).</li>
+    </ul>
+    <li><b>Retornar el indicador:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>La función devuelve el elemento HTML completo (<div> con los tres <span> dentro) para ser insertado en el DOM.</li>
+    </ul>
+  </ol>
+</div>
+<p>Esta función suele ser utilizada en <code>sendMessage()</code> para indicar que el bot está "pensando" o generando una respuesta antes de que esta aparezca con el efecto de tipeo.</p>
+
+
+<br>
+<h3>Función: <code>scrollToBottom()</code></h3>
+<p>Esta función desplaza automáticamente el área de mensajes hacia el final, asegurando que el mensaje más reciente (o indicador de escritura) siempre sea visible para el usuario.</p>
+<pre><code class="language-js">
+function scrollToBottom() {
+  chatbot.elements.messages.scrollTop =
+    chatbot.elements.messages.scrollHeight;
+}
+</code></pre>
+<h4>Flujo y comportamiento:</h4>
+<div style="margin:1rem">
+  <ol>
+    <li><b>Acceso al contenedor de mensajes:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Usa <code>chatbot.elements.messages</code>, que representa el área que contiene todos los mensajes del chat.</li>
+    </ul>
+    <li><b>Ajuste del desplazamiento:</b></li>
+    <ul style="margin-left: 20px;">
+      <li>Establece <code>scrollTop</code> igual a <code>scrollHeight</code>, lo cual mueve la vista al fondo del contenedor.</li>
+    </ul>
+  </ol>
+</div>
+<p>Se llama después de agregar un mensaje (por ejemplo, en showMessageWithTyping, showMessageInstant, o al crear el indicador de escritura) para mantener la conversación visible sin intervención del usuario.
+</p>
+
+
+<br>
+<h3>Fragmento: Alternar visibilidad del chat</h3>
+<p>Este bloque de código controla la apertura y cierre del chat cuando el usuario hace clic en el botón de alternar (<code>chatbot.elements.toggle</code>).</p>
+<pre><code class="language-js">
+// Alternar visibilidad del chat
+chatbot.elements.toggle.addEventListener("click", () => {
+  chatbot.state.isOpen = !chatbot.state.isOpen;
+  chatbot.elements.container.classList.toggle(
+    "hidden",
+    !chatbot.state.isOpen
+  );
+  if (chatbot.state.isOpen) scrollToBottom();
+});
+</code></pre>
+<h4>¿Qué hace?</h4>
+<div style="margin:1rem">
+  <ul>
+    <li>Escucha el evento click en el botón de alternar del chatbot.</li>
+    <li>Cambia el estado del chat (<code>chatbot.state.isOpen</code>) entre true y false.</li>
+    <li>Alterna la clase hidden en el contenedor del chat para mostrarlo u ocultarlo visualmente.</li>
+    <li>Si el chat se abre, se hace scroll automático hacia el último mensaje con <code>scrollToBottom()</code>.</li>
+  </ul>
+</div>
+<p>Se llama después de agregar un mensaje (por ejemplo, en <code>showMessageWithTyping, showMessageInstant</code>, o al crear el indicador de escritura) para mantener la conversación visible sin intervención del usuario.
+</p>
+
+<br>
+<h3>Fragmento: Cerrar el chat</h3>
+<p>Este bloque se encarga de cerrar completamente la ventana del chatbot cuando el usuario hace clic en el botón de cerrar (<code>closeBtn</code>).</p>
+<pre><code class="language-js">
+ // Cerrar el chat
+chatbot.elements.closeBtn.addEventListener("click", () => {
+  chatbot.state.isOpen = false;
+  chatbot.elements.container.classList.add("hidden");
+});
+</code></pre>
+<h4>¿Qué hace?</h4>
+<div style="margin:1rem">
+  <ul>
+    <li>Escucha el evento click en el botón de cerrar.</li>
+    <li>Cambia el estado del chatbot (chatbot.state.isOpen) a false.</li>
+    <li>Añade la clase hidden al contenedor del chat, ocultándolo de la vista.</li>
+  </ul>
+</div>
+
+<br>
+<h3>Fragmento: Enviar mensaje al presionar Enter</h3>
+<p>Este bloque permite al usuario enviar un mensaje presionando la tecla Enter, igual que en muchos chats o apps de mensajería.</p>
+<pre><code class="language-js">
+// Enviar mensaje al presionar Enter
+chatbot.elements.input.addEventListener("keypress", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+});
+</code></pre>
+<h4>¿Qué hace?</h4>
+<div style="margin:1rem">
+  <ul>
+    <li>Escucha la tecla presionada dentro del campo de entrada (input).</li>
+    <li>Si se presiona Enter sin la tecla Shift, evita el comportamiento por defecto (como un salto de línea) y llama a sendMessage().</li>
+  </ul>
+</div>
+
+<br>
+<h3>Fragmento: Enviar mensaje al hacer clic en el botón</h3>
+<p>Este bloque permite enviar un mensaje del usuario al hacer clic en el botón de enviar (ícono de avión o similar).</p>
+<pre><code class="language-js">
+// Enviar mensaje al hacer clic en el botón
+chatbot.elements.sendBtn.addEventListener("click", sendMessage);
+</code></pre>
+<h4>¿Qué hace?</h4>
+<div style="margin:1rem">
+  <ul>
+    <li>Escucha el evento click sobre el botón de enviar (<code>sendBtn</code>).</li>
+    <li>Llama a la función <code>sendMessage()</code> que se encarga de procesar y mostrar el mensaje del usuario y la respuesta del asistente.</li>
+  </ul>
+</div>
+<p>Con este fragmento, el usuario puede enviar mensajes no solo con la tecla Enter, sino también haciendo clic en el botón de enviar.</p>
+
+<br>
+<h3>Fragmento: Limpiar todo el historial de chat</h3>
+<p>Este bloque permite al usuario borrar todos los mensajes del historial al hacer clic en un botón.</p>
+<pre><code class="language-js">
+// Limpiar todo el historial de chat
+chatbot.elements.clearBtn.addEventListener("click", async () => {
+  try {
+    const response = await fetch("chatbot/chatbot.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: "action=clear_history",
+    });
+
+    const data = await response.json();
+
+    if (!data.success) {
+      throw new Error(data.error || "Error al limpiar historial");
+    }
+
+    // Vaciar el contenedor de mensajes
+    chatbot.elements.messages.innerHTML = "";
+  } catch (error) {
+    console.error("Error limpiando historial:", error);
+    showMessageInstant("No se pudo limpiar el historial", "system");
+  }
+});
+</code></pre>
+<h4>¿Qué hace?</h4>
+<div style="margin:1rem">
+  <ul>
+    <li>Escucha el clic en el botón de "Limpiar historial".</li>
+    <li>Envía una petición <code>POST</code> al servidor con la acción clear_history.</li>
+    <li>Si el servidor responde con éxito:</li>
+    <ul style="margin-left:1rem">
+      <li>Vacía el contenido del contenedor de mensajes (<code>chatbot.elements.messages.innerHTML = ""</code>).</li>
+    </ul>
+    <li>Si ocurre un error</li>
+    <ul style="margin-left:1rem">
+      <li>Muestra un mensaje de sistema indicando el fallo.</li>
+    </ul>
+  </ul>
+</div>
+
+<h4>Resultado</h4>
+<div style="margin:1rem">
+  <ul>
+    <li>El historial de mensajes se borra del servidor y de la interfaz.</li>
+    <li>Si hay un problema (como un fallo del servidor), el usuario ve un mensaje de error.</li>
+  </ul>
+</div>
+
+<br>
+<h3>Flujo General del Chatbot</h3>
+<pre><code class="language-plaintext">
+[Usuario escribe mensaje]
+        |
+        v
+ [input textarea] <---- escucha tecla "Enter" o clic en botón enviar
+        |
+        v
+ ┌─────────────────────────────┐
+ │    sanitizeUserInput()      │ ← Elimina scripts peligrosos
+ └─────────────────────────────┘
+        |
+        v
+ ┌─────────────────────────────┐
+ │   showMessageInstant()      │ ← Muestra mensaje del usuario
+ └─────────────────────────────┘
+        |
+        v
+ ┌─────────────────────────────┐
+ │  createTypingIndicator()    │ ← Muestra indicador "escribiendo..."
+ └─────────────────────────────┘
+        |
+        v
+ ┌─────────────────────────────┐
+ │     fetch (chatbot.php)     │ ← Envia mensaje al servidor
+ └─────────────────────────────┘
+        |
+        v
+[ Respuesta JSON: { success, response } ]
+        |
+        v
+┌──────────────────────────────────────┐
+│  showMessageWithTyping(response)     │ ← Muestra respuesta del bot
+└──────────────────────────────────────┘
+        |
+        v
+ [scrollToBottom()] ← asegura que el último mensaje sea visible
+
+</code></pre>
+
+</section>
+
+ <section id="soporte" class="doc-section">
+  <h2><i class="fas fa-life-ring"></i> Soporte y Solución de Problemas</h2>
+
+  <h3>Errores Comunes y Soluciones</h3>
+
+  <div class="feature-card">
+    <h4><i class="fas fa-exclamation-triangle"></i> El chatbot no responde</h4>
+    <p><strong>Posibles causas:</strong></p>
+    <div style="margin:1rem">
+      <ul>
+      <li>La clave de la API en el archivo <code>.env</code> es incorrecta o está vacía.</li>
+      <li>El servidor no permite conexiones salientes (cURL deshabilitado).</li>
+      <li>Se están generando errores en el backend (verifica el log de errores de PHP).</li>
+    </ul>
+    </div>
+    
+    <p><strong>Solución sugerida:</strong> Verifica los puntos anteriores y asegúrate de que tu servidor cumpla con los requisitos mínimos.</p>
+  </div>
+
+  <div class="feature-card">
+    <h4><i class="fas fa-exclamation-triangle"></i> Los mensajes no se guardan</h4>
+    <p><strong>Posibles causas:</strong></p>
+    <div style="margin:1rem">
+    <ul>
+      <li>Las sesiones de PHP no están habilitadas o configuradas correctamente.</li>
+      <li>Faltan permisos de escritura en el directorio donde se almacenan los datos.</li>
+      <li>Errores JavaScript están interfiriendo con la funcionalidad (revisa la consola del navegador).</li>
+    </ul>
+    </div>
+    <p><strong>Solución sugerida:</strong> Comprueba la configuración del servidor, permisos de archivos y errores en el navegador.</p>
+  </div>
+
+  <h3>¿Necesitas ayuda?</h3>
+  <p>Si no puedes resolver un problema, puedes contactar a nuestro equipo de soporte técnico:</p>
+  <div style="margin:1rem">
+  <ul>
+    <li><strong>Email:</strong> <a href="mailto:support@linkve.net">support@linkve.net</a></li>
+    <li><strong>Sitio web:</strong> <a href="https://www.linkve.net/contactus" target="_blank">https://www.linkve.net/contactus</a></li>
+  </ul>
+  </div>
+  <div class="nota-importante">
+    <h4>📌 Información que debes incluir al solicitar soporte:</h4>
+    <div style="margin:1rem">
+    <ul>
+      <li>Versión del chatbot instalada.</li>
+      <li>Descripción detallada del problema.</li>
+      <li>Capturas de pantalla (si aplica).</li>
+      <li>Mensajes de error (en consola o logs del servidor).</li>
+    </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script src="js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-core.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

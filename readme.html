@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chatbot IA para Empresas - Solución Completa</title>
+
+    <style>
+
+        :root {
+
+            --primary: #2563eb;
+
+            --primary-light: #3b82f6;
+
+            --dark: #1e293b;
+
+            --light: #f8fafc;
+
+            --gray: #64748b;
+
+            --gray-light: #e2e8f0;
+
+            --success: #16a34a;
+
+            --warning: #ea580c;
+
+        }
+
+        
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+        }
+
+        
+
+        body {
+
+            line-height: 1.6;
+
+            color: var(--dark);
+
+            background-color: var(--light);
+
+            padding: 0;
+
+            margin: 0;
+
+        }
+
+        
+
+        .container {
+
+            max-width: 1200px;
+
+            margin: 0 auto;
+
+            padding: 2rem 1rem;
+
+        }
+
+        
+
+        header {
+
+            text-align: center;
+
+            margin-bottom: 3rem;
+
+            padding-bottom: 1.5rem;
+
+            border-bottom: 1px solid var(--gray-light);
+
+        }
+
+        
+
+        h1 {
+
+            font-size: 2.5rem;
+
+            margin-bottom: 1rem;
+
+            color: var(--primary);
+
+            font-weight: 700;
+
+        }
+
+        
+
+        .tagline {
+
+            font-size: 1.25rem;
+
+            color: var(--gray);
+
+            max-width: 700px;
+
+            margin: 0 auto;
+
+            line-height: 1.8;
+
+        }
+
+        
+
+        .card {
+
+            background: white;
+
+            border-radius: 12px;
+
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+
+            padding: 2.5rem;
+
+            margin-bottom: 2.5rem;
+
+            border: 1px solid var(--gray-light);
+
+        }
+
+        
+
+        h2 {
+
+            color: var(--primary);
+
+            margin-bottom: 1.5rem;
+
+            font-size: 1.75rem;
+
+            font-weight: 600;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.75rem;
+
+        }
+
+        
+
+        h2::before {
+
+            content: "";
+
+            display: block;
+
+            width: 6px;
+
+            height: 24px;
+
+            background: var(--primary);
+
+            border-radius: 3px;
+
+        }
+
+        
+
+        h3 {
+
+            color: var(--dark);
+
+            margin: 1.5rem 0 1rem;
+
+            font-size: 1.25rem;
+
+            font-weight: 600;
+
+        }
+
+        
+
+        p {
+
+            margin-bottom: 1.25rem;
+
+            color: var(--dark);
+
+        }
+
+        
+
+        ul, ol {
+
+            margin-bottom: 1.5rem;
+
+            padding-left: 1.75rem;
+
+        }
+
+        
+
+        li {
+
+            margin-bottom: 0.75rem;
+
+            color: var(--dark);
+
+        }
+
+        
+
+        .highlight {
+
+            background-color: #f1f5f9;
+
+            border-left: 4px solid var(--primary);
+
+            padding: 1.25rem;
+
+            margin: 1.5rem 0;
+
+            border-radius: 0 6px 6px 0;
+
+            font-family: 'Roboto Mono', monospace;
+
+            overflow-x: auto;
+
+        }
+
+        
+
+        .note {
+
+            background-color: #eff6ff;
+
+            border-left: 4px solid var(--primary);
+
+            padding: 1.25rem;
+
+            margin: 1.5rem 0;
+
+            border-radius: 0 6px 6px 0;
+
+        }
+
+        
+
+        .note strong {
+
+            color: var(--primary);
+
+        }
+
+        
+
+        .warning {
+
+            background-color: #fffbeb;
+
+            border-left: 4px solid var(--warning);
+
+            padding: 1.25rem;
+
+            margin: 1.5rem 0;
+
+            border-radius: 0 6px 6px 0;
+
+        }
+
+        
+
+        .warning strong {
+
+            color: var(--warning);
+
+        }
+
+        
+
+        .cta {
+
+            background-color: var(--primary);
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 0.875rem 1.75rem;
+
+            border-radius: 6px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 0.5rem;
+
+            margin-top: 1rem;
+
+            font-weight: 600;
+
+            transition: all 0.2s;
+
+            border: none;
+
+            cursor: pointer;
+
+            font-size: 1rem;
+
+        }
+
+        
+
+        .cta:hover {
+
+            background-color: var(--primary-light);
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+
+        }
+
+        
+
+        .grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+            gap: 1.75rem;
+
+            margin: 2rem 0;
+
+        }
+
+        
+
+        .feature-card {
+
+            background: white;
+
+            border-radius: 8px;
+
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+
+            padding: 1.75rem;
+
+            border: 1px solid var(--gray-light);
+
+            transition: all 0.2s;
+
+        }
+
+        
+
+        .feature-card:hover {
+
+            transform: translateY(-4px);
+
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+
+        }
+
+        
+
+        .feature-icon {
+
+            font-size: 1.5rem;
+
+            margin-bottom: 1rem;
+
+            color: var(--primary);
+
+        }
+
+        
+
+        .provider-card {
+
+            background: white;
+
+            border-radius: 8px;
+
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+
+            padding: 1.75rem;
+
+            border-top: 4px solid var(--primary);
+
+            display: flex;
+
+            flex-direction: column;
+
+            height: 100%;
+
+        }
+
+        
+
+        .provider-name {
+
+            font-weight: 700;
+
+            margin-bottom: 0.75rem;
+
+            color: var(--dark);
+
+            font-size: 1.125rem;
+
+        }
+
+        
+
+        .provider-desc {
+
+            margin-bottom: 1.25rem;
+
+            flex-grow: 1;
+
+        }
+
+        
+
+        .requirement-item {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 0.75rem;
+
+            margin-bottom: 0.75rem;
+
+        }
+
+        
+
+        .requirement-icon {
+
+            color: var(--primary);
+
+            font-size: 1.25rem;
+
+            margin-top: 0.125rem;
+
+        }
+
+        
+
+        .contact-info {
+
+            margin-top: 4rem;
+
+            text-align: center;
+
+            padding: 3rem 0;
+
+            background-color: #f1f5f9;
+
+            border-radius: 12px;
+
+        }
+
+        
+
+        .section-divider {
+
+            height: 1px;
+
+            background: var(--gray-light);
+
+            margin: 3rem 0;
+
+        }
+
+        
+
+        @media (max-width: 768px) {
+
+            .container {
+
+                padding: 1.25rem;
+
+            }
+
+            
+
+            h1 {
+
+                font-size: 2rem;
+
+            }
+
+            
+
+            .card {
+
+                padding: 1.75rem;
+
+            }
+
+        }
+        
+        /* Estilos adicionales para la nueva sección */
+        pre {
+            background-color: #f1f5f9;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--primary);
+        }
+        
+        code {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+        }
+        
+        hr {
+            border: none;
+            border-top: 1px solid var(--gray-light);
+            margin: 1.5rem 0;
+        }
+
+    </style>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+
+            <h1>Chatbot con IA para tu Empresa</h1>
+
+            <p class="tagline">Un asistente virtual flotante que responde preguntas sobre tu negocio usando inteligencia artificial, fácil de instalar y sin necesidad de bases de datos complejas.</p>
+
+        </header>
+
+        
+
+        <div class="card">
+
+            <h2>¿Qué es este chatbot?</h2>
+
+            <p>Es un <strong>asistente virtual inteligente</strong> que puedes agregar a tu sitio web para que interactúe con tus clientes las 24 horas, respondiendo preguntas sobre:</p>
+
+            
+
+            <div class="grid">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">📋</div>
+
+                    <h3>Información básica</h3>
+
+                    <p>Servicios, productos, precios, promociones y características de lo que ofreces.</p>
+
+                </div>
+
+                
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">🕒</div>
+
+                    <h3>Horarios y ubicación</h3>
+
+                    <p>Días y horarios de atención, ubicación física, áreas de cobertura y envíos.</p>
+
+                </div>
+
+                
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">📞</div>
+
+                    <h3>Contacto y soporte</h3>
+
+                    <p>Teléfonos, emails, redes sociales y canales de comunicación directa.</p>
+
+                </div>
+
+            </div>
+
+            
+
+            <div class="note">
+
+                <p><strong>Diseñado especialmente para:</strong> PYMES, negocios locales, profesionales independientes y cualquier empresa que quiera ofrecer atención inmediata sin contratar personal adicional.</p>
+
+            </div>
+
+        </div>
+
+        
+
+        <div class="card">
+
+            <h2>¿Cómo funciona?</h2>
+
+            <p>El sistema utiliza inteligencia artificial para comprender preguntas y responder de manera natural, pero todo el proceso es sencillo para ti:</p>
+
+            
+
+            <ol>
+
+                <li><strong>Preparas un archivo JSON</strong> con toda la información relevante de tu empresa (te proporcionamos la plantilla)</li>
+
+                <li><strong>Configuras el chatbot</strong> en tu sitio web (solo necesitas copiar unos archivos)</li>
+
+                <li><strong>Obtienes una clave API</strong> (te guiamos paso a paso)</li>
+
+                <li><strong>El chatbot está listo</strong> para responder a tus clientes</li>
+
+            </ol>
+
+            
+
+            <div class="highlight">
+
+                // Ejemplo de estructura básica en tu archivo JSON<br>
+
+                {<br>
+
+                &nbsp;&nbsp;"empresa": "Mi Negocio",<br>
+
+                &nbsp;&nbsp;"servicios": ["Servicio 1", "Servicio 2"],<br>
+
+                &nbsp;&nbsp;"horarios": "Lunes a Viernes 9am-6pm"<br>
+
+                }
+
+            </div>
+
+            
+
+            <div class="note">
+
+                <p><strong>Características técnicas avanzadas:</strong></p>
+
+                <ul>
+
+                    <li><strong>Caché inteligente:</strong> Recuerda respuestas para no repetir consultas iguales</li>
+
+                    <li><strong>Historial por sesión:</strong> Mantiene el contexto de cada conversación</li>
+
+                    <li><strong>Límites configurables:</strong> Controlas cuánto puede responder el chatbot</li>
+
+                    <li><strong>Prompt especializado:</strong> Solo habla de tu empresa, evitando temas irrelevantes</li>
+
+                </ul>
+
+            </div>
+
+            
+
+            <div class="warning">
+
+                <p><strong>Escalabilidad:</strong> Esta solución es perfecta para pequeñas y medianas empresas. Si necesitas algo para cientos de usuarios simultáneos o múltiples empresas, recomendamos implementar una base de datos MySQL en lugar del archivo JSON.</p>
+
+            </div>
+
+        </div>
+
+        
+
+        <div class="card">
+
+            <h2>Requisitos del sistema</h2>
+
+            <p>Para instalar y usar este chatbot en tu sitio web, necesitas:</p>
+
+            
+
+            <h3>Para desarrollo/pruebas:</h3>
+
+            <div class="grid">
+
+                <div class="feature-card">
+
+                    <div class="requirement-item">
+
+                        <span class="requirement-icon">💻</span>
+
+                        <div>
+
+                            <strong>Editor de código</strong><br>
+
+                            Visual Studio Code, Sublime Text o similar
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                
+
+                <div class="feature-card">
+
+                    <div class="requirement-item">
+
+                        <span class="requirement-icon">🌐</span>
+
+                        <div>
+
+                            <strong>Navegador moderno</strong><br>
+
+                            Chrome, Firefox, Edge o Safari
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            
+
+            <h3>Para producción/hosting:</h3>
+
+            <div class="grid">
+
+                <div class="feature-card">
+
+                    <div class="requirement-item">
+
+                        <span class="requirement-icon">⚙️</span>
+
+                        <div>
+
+                            <strong>Servidor web</strong><br>
+
+                            Cualquier hosting compartido con PHP
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                
+
+                <div class="feature-card">
+
+                    <div class="requirement-item">
+
+                        <span class="requirement-icon">🔄</span>
+
+                        <div>
+
+                            <strong>PHP 8.0 o superior</strong><br>
+
+                            Versión reciente para mejor rendimiento
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                
+
+                <div class="feature-card">
+
+                    <div class="requirement-item">
+
+                        <span class="requirement-icon">📡</span>
+
+                        <div>
+
+                            <strong>Extensión cURL</strong><br>
+
+                            Para conexión con APIs externas
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                
+
+                <div class="feature-card">
+
+                    <div class="requirement-item">
+
+                        <span class="requirement-icon">🚀</span>
+
+                        <div>
+
+                            <strong>APCu (recomendado)</strong><br>
+
+                            Mejora el rendimiento con caché
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            
+
+            <div class="warning">
+
+                <p><strong>Importante:</strong> El chatbot debe ejecutarse en un servidor web. No funcionará si abres los archivos directamente en tu navegador desde tu computadora.</p>
+
+            </div>
+
+            
+
+            <h3>Opciones para pruebas locales:</h3>
+
+            <ul>
+
+                <li><a href="https://www.apachefriends.org/" target="_blank">XAMPP</a> (Windows/Mac/Linux)</li>
+
+                <li><a href="https://laragon.org/" target="_blank">Laragon</a> (Windows, rápido y ligero)</li>
+
+                <li><a href="https://www.wampserver.com/" target="_blank">WAMP</a> (Solo Windows)</li>
+
+                <li><a href="https://www.mamp.info/" target="_blank">MAMP</a> (Mac/Windows)</li>
+
+            </ul>
+
+        </div>
+
+        
+
+        <div class="section-divider"></div>
+
+        
+
+        <div class="card">
+
+            <h2>Obtener clave API</h2>
+
+            <p>El chatbot necesita conectarse a un servicio de inteligencia artificial. Te explicamos las opciones:</p>
+
+            
+
+            <div class="grid">
+
+                <div class="provider-card">
+
+                    <div class="provider-name">OpenAI (ChatGPT)</div>
+
+                    <div class="provider-desc">
+
+                        <p>El servicio más avanzado con los modelos de GPT-4. Requiere tarjeta de crédito pero ofrece los mejores resultados.</p>
+
+                        <ul>
+
+                            <li>Más preciso y detallado</li>
+
+                            <li>Mayor costo por consulta</li>
+
+                            <li>Ideal para negocios establecidos</li>
+
+                        </ul>
+
+                    </div>
+
+                    <a href="https://platform.openai.com/" class="cta" target="_blank">Obtener clave</a>
+
+                </div>
+
+                
+
+                <div class="provider-card">
+
+                    <div class="provider-name">Deepseek</div>
+
+                    <div class="provider-desc">
+
+                        <p>Alternativa potente y más económica que OpenAI, con excelente rendimiento en español.</p>
+
+                        <ul>
+
+                            <li>Buena relación calidad-precio</li>
+
+                            <li>Modelos especializados</li>
+
+                            <li>Ideal para empresas</li>
+
+                        </ul>
+
+                    </div>
+
+                    <a href="https://platform.deepseek.com/" class="cta" target="_blank">Obtener clave</a>
+
+                </div>
+
+                
+
+                <div class="provider-card">
+
+                    <div class="provider-name">OpenRouter</div>
+
+                    <div class="provider-desc">
+
+                        <p>Plataforma que agrupa múltiples modelos, incluyendo opciones gratuitas para empezar.</p>
+
+                        <ul>
+
+                            <li>Modelos gratuitos disponibles</li>
+
+                            <li>Elige entre múltiples proveedores</li>
+
+                            <li>Perfecto para probar el sistema</li>
+
+                        </ul>
+
+                    </div>
+
+                    <a href="https://openrouter.ai/" class="cta" target="_blank">Obtener clave</a>
+
+                </div>
+
+            </div>
+
+            
+
+            <div class="note">
+
+                <p><strong>Guía rápida para comenzar sin costo:</strong></p>
+
+                <ol>
+
+                    <li>Regístrate en <a href="https://openrouter.ai/" target="_blank">OpenRouter</a></li>
+
+                    <li>Genera tu API Key en la sección "Keys"</li>
+
+                    <li>Usa el modelo gratuito <code>google/gemma-3-27b-it:free</code></li>
+
+                    <li>Configura esta clave en tu chatbot</li>
+
+                </ol>
+
+            </div>
+
+            
+
+            <div class="warning">
+
+                <p><strong>Seguridad:</strong> Tu clave API es personal. No la compartas públicamente ni la incluyas en código que puedas subir a GitHub u otros repositorios públicos.</p>
+
+            </div>
+
+        </div>
+        
+        <!-- Instalación y Configuración -->
+        <div class="card">
+            <h2><i class="fas fa-cogs"></i> Instalación y Configuración</h2>
+            <p>
+                Sigue estos pasos para integrar y configurar el ChatBot + IA en tu sitio web.
+                La instalación está diseñada para ser simple, permitiendo una configuración rápida.
+            </p>
+            <hr>
+            <h3>Paso 1: Coloca la carpeta del Chatbot</h3>
+            <p>
+                El chatbot se distribuye en una carpeta llamada <code>/chatbot</code>. Para usarlo,
+                simplemente copia esta carpeta completa y colócala en el <strong>directorio raíz</strong>
+                de tu sitio web. Esta es la misma ubicación donde normalmente se encuentra tu archivo
+                <code>index.html</code> o página principal.
+            </p>
+            <p>La estructura de tu proyecto debería verse similar a esto:</p>
+            <pre><code class="language-plaintext">
+    /tu-sitio-raiz/
+      ├── index.html (o tu página principal)
+      ├── css/
+      ├── js/
+      ├── img/
+      ├── chatbot/  &lt;-- AQUÍ VA LA CARPETA DEL CHATBOT
+      │     ├── cache/
+      │           ├── company_data.cache
+      │     ├── css/
+      │           ├── chatbot.css
+      │     ├── data/
+      │           ├── company.json
+      │     ├── img/
+      │           ├── chatbot.png
+      │     ├── js/
+      │           ├── chatbot.js
+      │     ├── .env
+      │     ├── chatbot.php
+      └── ... (otros archivos y carpetas de tu sitio)
+            </code></pre>
+            <p>
+                Asegúrate de que las carpetas <code>/chatbot/data/</code> y 
+                <code>/chatbot/cache/</code> existan y tengan permisos de escritura si tu servidor 
+                los requiere para que el script PHP pueda crear y modificar archivos dentro de ellas.
+            </p>
+            <hr>
+            <h3>Paso 2: Integra el HTML del Chatbot</h3>
+            <p>
+                Para que el chatbot esté disponible en todas las secciones de tu sitio web,
+                se recomienda incluir su código HTML en el pie de página (<code>footer</code>)
+                de tu plantilla principal o justo antes de la etiqueta de cierre 
+                <code>&lt;/body&gt;</code> en cada página donde quieras que aparezca.
+            </p>
+            <p>Copia y pega el siguiente bloque HTML:</p>
+            <pre><code class="language-html">
+    &lt;!-- Componente del Chatbot --&gt;
+    &lt;!-- Botón de invitación inicial --&gt;
+    &lt;div id="chatbot-invite" class="chatbot-invite"&gt;
+      &lt;span&gt;¡Chatea con nosotros!&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Botón de alternancia del chatbot --&gt;
+    &lt;div id="chatbot-toggle" class="chatbot-toggle"&gt;
+      &lt;img
+        src="./chatbot/img/chatbot.png"
+        width="50"
+        height="50"
+        alt="Icono de asistente virtual"
+        class="img-zoom"
+      /&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Contenedor principal del chatbot --&gt;
+    &lt;div id="chatbot-container" class="chatbot-container hidden"&gt;
+      &lt;!-- Cabecera del chatbot --&gt;
+      &lt;div class="chatbot-header"&gt;
+        &lt;span style="display: inline-flex; align-items: center; gap: 8px"&gt;
+          &lt;img
+            src="./chatbot/img/chatbot.png"
+            width="50"
+            height="50"
+            alt="Asistente Virtual"
+            class="img-zoom"
+          /&gt;
+          &lt;span&gt;Tu Asistente Virtual&lt;/span&gt;
+        &lt;/span&gt;
+        &lt;button
+          id="chatbot-close"
+          class="chatbot-close"
+          aria-label="Cerrar chatbot"
+        &gt;
+          &lt;i class="fa-solid fa-circle-xmark"&gt;&lt;/i&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Área de mensajes --&gt;
+      &lt;div id="chatbot-messages" class="chatbot-messages"&gt;
+        &lt;!-- Los mensajes se insertan dinámicamente desde JavaScript --&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Pie del chatbot con controles de entrada --&gt;
+      &lt;div class="chatbot-footer"&gt;
+        &lt;button class="clear-history-btn" title="Borrar Historial"&gt;
+          &lt;i class="fa-regular fa-trash-can"&gt;&lt;/i&gt;
+        &lt;/button&gt;
+        &lt;input
+          type="text"
+          id="chatbot-input-field"
+          class="chatbot-input-field"
+          placeholder="Escribe tu mensaje..."
+          autofocus
+          aria-label="Campo de entrada del chatbot"
+        /&gt;
+        &lt;button
+          id="chatbot-send"
+          class="chatbot-send"
+          aria-label="Enviar mensaje"
+        &gt;
+          &lt;i class="fas fa-paper-plane"&gt;&lt;/i&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- Fin del Componente del Chatbot --&gt;
+            </code></pre>
+            <div class="note">
+                <p>
+                    Asegúrate de que las rutas de las imágenes (ej. 
+                    <code>src="./chatbot/img/chatbot.png"</code>)
+                    sean correctas desde la ubicación de tus archivos HTML principales. Si tu 
+                    <code>index.html</code> está en la raíz
+                    y la carpeta <code>chatbot</code> también está allí, 
+                    estas rutas deberían funcionar.
+                </p>
+            </div>
+            <p>
+                No olvides enlazar los archivos CSS (<code>chatbot.css</code>) y JavaScript 
+                (<code>chatbot.js</code>) del chatbot en tu HTML,
+                típicamente en la sección <code>&lt;head&gt;</code> 
+                para CSS y antes de cerrar <code>&lt;/body&gt;</code> para JS:
+            </p>
+            <pre><code class="language-html">
+    &lt;!-- En el &lt;head&gt; o antes de cerrar &lt;/body&gt; para CSS --&gt;
+    &lt;link rel="stylesheet" href="./chatbot/chatbot.css"&gt;
+
+    &lt;!-- Antes de cerrar &lt;/body&gt; para JavaScript --&gt;
+    &lt;script src="./chatbot/chatbot.js"&gt;&lt;/script&gt;
+            </code></pre>
+            <hr>
+            <h3>Paso 3: Configura el archivo de entorno (<code>.env</code>)</h3>
+            <p>
+                El chatbot usa un archivo <code>.env</code> para gestionar 
+                configuraciones sensibles y específicas del entorno,
+                como claves API y rutas.
+                <code>/chatbot/.env</code>.
+            </p>
+            <pre><code class="language-ini">
+    API_URL=https://api.openai.com/v1/chat/completions
+    API_KEY=tu_clave_api_aqui
+    MODEL=gpt-3.5-turbo
+    COMPANY_DATA_PATH=./data/company.json
+    MAX_TOKENS=1000
+    TEMPERATURE=0.7
+    CACHE_PATH=./cache/
+    COMPANY_CACHE_FILE=./cache/company_data.cache
+    CACHE_LIFETIME=3600
+            </code></pre>
+            <p><strong>Descripción de variables:</strong></p>
+            <ul>
+                <li>
+                    <code>API_URL</code>: El endpoint para la API del modelo de lenguaje (ej. OpenAI).
+                </li>
+                <li>
+                    <code>API_KEY</code>: 
+                    <strong>Importante:</strong> Reemplaza 
+                    <code>tu_clave_api_aqui</code> con tu clave API real
+                    proporcionada por el servicio de IA (ej. OpenAI).
+                </li>
+                <li>
+                    <code>MODEL</code>: El identificador del modelo de IA que quieres usar.
+                </li>
+                <li>
+                    <code>COMPANY_DATA_PATH</code>: Ruta relativa 
+                    (desde el script PHP que lo lee, normalmente dentro de 
+                    <code>/chatbot/</code>)
+                    al archivo JSON que contiene la información de tu empresa. Por defecto, 
+                    <code>./data/company.json</code> se refiere a
+                    <code>/chatbot/data/company.json</code>.
+                </li>
+                <li>
+                    <code>MAX_TOKENS</code>: Número máximo de tokens 
+                    (palabras/subpalabras) que la IA generará en su respuesta.
+                </li>
+                <li>
+                    <code>TEMPERATURE</code>: Controla la "creatividad" o aleatoriedad de las respuestas de la IA.
+                    Valores bajos (ej. 0.2) producen respuestas más deterministas y enfocadas, mientras que valores altos
+                    (ej. 0.8) producen respuestas más creativas y diversas. 
+                    <code>0.7</code> es un valor equilibrado.
+                </li>
+                <li>
+                    <code>CACHE_PATH</code>: Ruta relativa al directorio donde se almacenarán los archivos de caché.
+                    Por defecto, <code>./cache/</code> se refiere a 
+                    <code>/chatbot/cache/</code>.
+                </li>
+                <li>
+                    <code>COMPANY_CACHE_FILE</code>: Ruta relativa al archivo de caché específico para los datos de la empresa.
+                    Por defecto, <code>./cache/company_data.cache</code> se refiere a 
+                    <code>/chatbot/cache/company_data.cache</code>.
+                </li>
+                <li>
+                    <code>CACHE_LIFETIME</code>: Tiempo de vida de la caché en segundos (ej. <code>3600</code> = 1 hora).
+                </li>
+            </ul>
+            <div class="warning">
+                <p>
+                    <strong>¡No compartas tu archivo <code>.env</code> 
+                    públicamente ni lo subas a repositorios públicos de código!</strong>
+                    Asegúrate de que tu servidor web esté configurado para denegar el acceso directo a 
+                    archivos <code>.env</code>.
+                    Si usas Git, añade <code>.env</code> a tu archivo 
+                    <code>.gitignore</code>.
+                </p>
+            </div>
+            <hr>
+            <h3>Paso 4: Configura el archivo de información de la empresa (<code>company.json</code>)</h3>
+            <p>
+                El chatbot está diseñado para responder preguntas basadas en información específica de tu empresa.
+                Esta información se carga desde un archivo JSON.
+            </p>
+            <p>
+                Crea un archivo llamado <code>company.json</code> 
+                dentro de la carpeta <code>/chatbot/data/</code>
+                (la ruta por defecto es <code>./data/company.json</code> según la configuración de 
+                <code>.env</code>).
+            </p>
+            <p>El contenido de este archivo debe ser un objeto JSON estructurado
+             con la información que quieres que la IA conozca. Aquí tienes un ejemplo básico:</p>
+            <pre><code class="language-json">
+    {
+      "company_name": "Mi Gran Empresa S.A.",
+      "general_description": "Somos líderes en soluciones innovadoras para el sector X, 
+                              con más de 20 años de experiencia.",
+      "business_hours": "Lunes a Viernes de 9:00 AM a 6:00 PM",
+      "contact": {
+        "phone": "+123 456 7890",
+        "email": "info@migranempresa.com",
+        "address": "123 Calle Falsa, Ciudad Ejemplo"
+      },
+      "products_services": [
+        {
+          "name": "Producto Estrella Alfa",
+          "description": "Nuestra solución más popular para optimizar Y.",
+          "price": "Desde $99"
+        },
+        {
+          "name": "Servicio Premium Beta",
+          "description": "Consultoría experta y soporte 24/7 para Z.",
+          "features": ["Soporte prioritario", "Consultores dedicados", "Reportes mensuales"]
+        }
+      ],
+      "frequently_asked_questions": [
+        {
+          "question": "¿Cómo puedo contratar sus servicios?",
+          "answer": "Puedes contactarnos por correo electrónico a 
+                    info@migranempresa.com o llamando al 
+                    +123 456 7890. También puedes visitar nuestra sección de contacto en el sitio web."
+        },
+        {
+          "question": "¿Ofrecen demostraciones?",
+          "answer": "Sí, ofrecemos demostraciones gratuitas de nuestro Producto Estrella Alfa. 
+                    Por favor agenda una cita con nuestro equipo de ventas."
+        }
+      ],
+      "return_policy": "Puedes consultar nuestra política de devoluciones en 
+                        www.ejemplo.com/devoluciones. 
+                        Generalmente, aceptamos devoluciones dentro de los 30 días posteriores a la compra, 
+                        siempre que el producto esté en su condición original."
+    }
+            </code></pre>
+            <p>
+                Puedes estructurar este JSON como consideres adecuado. La IA intentará extraer información relevante
+                de este archivo para responder a las consultas de los usuarios sobre tu empresa. Cuanto más detallada
+                y bien estructurada esté la información, mejores serán las respuestas.
+            </p>
+            <hr>
+            <p>
+                Una vez completados estos pasos, tu chatbot debería estar listo para funcionar en tu sitio web.
+                Consulta las guías específicas de PHP, HTML, CSS y JavaScript para entender mejor cómo
+                modificar y extender la funcionalidad del chatbot.
+            </p>
+        </div>
+
+        <div class="contact-info">
+
+            <h2>¿Necesitas ayuda con la implementación?</h2>
+
+            <p>Ofrezco soporte técnico, instalación guiada y personalizaciones para adaptar el chatbot a tus necesidades específicas.</p>
+
+            
+
+            <div style="margin-top: 2rem;">
+
+                <a href="mailto:mariosandovalp3@gmail.com" class="cta">✉️ Contactar por email</a>
+
+                <a href="https://www.linkedin.com/in/mariosandovaldev/" class="cta" style="background: #0a66c2; margin-left: 1rem;" target="_blank">🔗 LinkedIn</a>
+
+            </div>
+
+            
+
+            <p style="margin-top: 2rem;">Resuelvo tus dudas técnicas y te ayudo desde cero si no tienes conocimientos de programación.</p>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

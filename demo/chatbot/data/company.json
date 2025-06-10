@@ -1,0 +1,106 @@
+{
+  "firma_legal": {
+    "nombre": "LawFirm",
+    "eslogan": "Soluciones Legales Integrales",
+    "lema": "Protegiendo sus derechos con excelencia y compromiso",
+    "anio_fundacion": 1998,
+    "experiencia": 25,
+    "mision": "Proteger los derechos e intereses de nuestros clientes mediante representación legal excepcional, combinando experiencia técnica con un enfoque estratégico personalizado.",
+    "reconocimientos": "Premiados como una de las mejores firmas legales por 5 años consecutivos",
+    "estadisticas": {
+      "casos_exitosos": 1500,
+      "satisfaccion_clientes": 98,
+      "numero_abogados": 15
+    },
+    "servicios": [
+      {
+        "nombre": "Derecho Corporativo",
+        "descripcion": "Asesoría legal integral para empresas, desde constitución hasta operaciones complejas.",
+        "icono": "fas fa-balance-scale"
+      },
+      {
+        "nombre": "Derecho Inmobiliario",
+        "descripcion": "Transacciones, contratos y litigios relacionados con propiedades y bienes raíces.",
+        "icono": "fas fa-home"
+      },
+      {
+        "nombre": "Derecho Laboral",
+        "descripcion": "Asesoría en contratación, despidos, negociaciones colectivas y conflictos laborales.",
+        "icono": "fas fa-user-tie"
+      },
+      {
+        "nombre": "Litigios",
+        "descripcion": "Representación en juicios civiles, comerciales y administrativos con altas tasas de éxito.",
+        "icono": "fas fa-gavel"
+      },
+      {
+        "nombre": "Contratos",
+        "descripcion": "Elaboración, revisión y negociación de contratos para proteger sus intereses.",
+        "icono": "fas fa-file-contract"
+      },
+      {
+        "nombre": "Propiedad Intelectual",
+        "descripcion": "Protección de marcas, patentes, derechos de autor y secretos comerciales.",
+        "icono": "fas fa-lock"
+      }
+    ],
+    "equipo": [
+      {
+        "nombre": "Dr. Carlos Méndez",
+        "especialidad": "Derecho Corporativo",
+        "foto": "./assets/img/photo-1562788869-4ed32648eb72.jpg"
+      },
+      {
+        "nombre": "Dra. Laura Ramírez",
+        "especialidad": "Derecho Laboral",
+        "foto": "./assets/img/photo-1573496359142-b8d87734a5a2.jpg"
+      },
+      {
+        "nombre": "Dr. Javier López",
+        "especialidad": "Litigios",
+        "foto": "./assets/img/photo-1560250097-0b93528c311a.jpg"
+      },
+      {
+        "nombre": "Dra. Ana Torres",
+        "especialidad": "Propiedad Intelectual",
+        "foto": "./assets/img/photo-1551836022-d5d88e9218df.jpg"
+      }
+    ],
+    "testimonios": [
+      {
+        "cliente": "Roberto Sánchez",
+        "cargo": "CEO, TechSolutions",
+        "comentario": "LawFirm resolvió un complejo caso corporativo para nuestra empresa con profesionalismo y eficiencia. Recomiendo ampliamente sus servicios.",
+        "foto": "./assets/img/32.jpg"
+      },
+      {
+        "cliente": "María González",
+        "cargo": "Empresaria",
+        "comentario": "Gracias al equipo de LawFirm pude recuperar mi propiedad después de un largo litigio. Su dedicación y conocimiento fueron clave para el éxito.",
+        "foto": "./assets/img/44.jpg"
+      },
+      {
+        "cliente": "David Johnson",
+        "cargo": "Director Internacional, GlobalCorp",
+        "comentario": "Como empresa internacional, necesitábamos asesoría legal especializada. LawFirm nos ha brindado soluciones efectivas en múltiples jurisdicciones.",
+        "foto": "./assets/img/75.jpg"
+      }
+    ],
+    "contacto": {
+      "direccion": "Av. Principal 1234, Piso 10, Distrito Financiero, Ciudad",
+      "telefono": "+1 (555) 123-4567",
+      "email": "info@LawFirm.com",
+      "horario": {
+        "semana": "Lunes a Viernes: 9:00 am - 6:00 pm",
+        "sabado": "Sábados: 10:00 am - 2:00 pm"
+      },
+      "redes_sociales": {
+        "facebook": "LawFirm",
+        "twitter": "LawFirm",
+        "linkedin": "LawFirm",
+        "instagram": "LawFirm"
+      }
+    },
+    "mapa": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215573291234!2d-73.9878449241646!3d40.75798597138971!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2sTimes%20Square!5e0!3m2!1sen!2sus!4v1623251234567!5m2!1sen!2sus"
+  }
+}
