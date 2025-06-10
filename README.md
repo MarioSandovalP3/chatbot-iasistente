@@ -301,5 +301,5 @@ Una vez completados estos pasos, tu chatbot debería estar listo para funcionar 
 
 Si necesitas ayuda técnica, personalizaciones o tienes alguna pregunta, no dudes en contactarme:
 
-- 📧 Email: [mariosandovalp3@gmail.com](mailto:mariosandovalp3@gmail.com)
+- 📧 Email: [mariosandoval.dev@gmail.com](mariosandoval.dev@gmail.com)
 - 💼 LinkedIn: [https://www.linkedin.com/in/mariosandovaldev/](https://www.linkedin.com/in/mariosandovaldev/)
