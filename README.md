@@ -1,3 +1,7 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+![PHP Version](https://img.shields.io/badge/PHP-8.0%2B-blue)
+![Frontend](https://img.shields.io/badge/Frontend-HTML%2C%20CSS%2C%20JS-blue)
+
 # 🧠 Chatbot AI con PHP y OpenAI (Compatible con Deepseek y OpenRouter)
 
 Un **chatbot flotante** que responde preguntas sobre tu negocio usando **inteligencia artificial** y datos estructurados desde un archivo .json.
@@ -297,9 +301,17 @@ Una vez completados estos pasos, tu chatbot debería estar listo para funcionar 
 
 ---
 
-## 🛠️ Soporte y Contacto
+## Licencia
 
-Si necesitas ayuda técnica, personalizaciones o tienes alguna pregunta, no dudes en contactarme:
+Este proyecto está licenciado bajo la [Licencia MIT](https://opensource.org/licenses/MIT).
 
-- 📧 Email: [mariosandoval.dev@gmail.com](mariosandoval.dev@gmail.com)
-- 💼 LinkedIn: [https://www.linkedin.com/in/mariosandovaldev/](https://www.linkedin.com/in/mariosandovaldev/)
+
+## 💖 Apóyame
+
+Tu apoyo me ayuda a seguir mejorando este proyecto:
+
+[![PayPal](https://img.shields.io/badge/Donar-PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/linkvems)
+[![Ko-fi](https://img.shields.io/badge/Invítame_un_café-Ko--fi-29abe0?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/mariosandovaldev)
+
+
+
